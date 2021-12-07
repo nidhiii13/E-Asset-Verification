@@ -36,7 +36,7 @@ def login(request):
     password = request.data.get("password")
     type=request.data.get("type")
     if username is None or password is None:
-        return Response({'error': 'Please provide both username and password'},
+        return Response({'error': 'username or password cant be none'},
                         status=HTTP_400_BAD_REQUEST)
     user = authenticate(request,username=username, password=password)
     if not user:
