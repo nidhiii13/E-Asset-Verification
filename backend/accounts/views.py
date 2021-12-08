@@ -44,9 +44,9 @@ def login(request):
                         status=HTTP_404_NOT_FOUND)
     
     token, _ = Token.objects.get_or_create(user=user)
-    if user.is_verifier:
+    if user.is_verifier and type=='verifier':
         return Response({'token': token.key,"type":type},
                     status=HTTP_200_OK)
-    elif user.is_assistant:
+    elif user.is_assistant and type=='assistant':
         return Response({'token': token.key,"type":type},
                     status=HTTP_200_OK)

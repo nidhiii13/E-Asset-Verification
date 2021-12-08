@@ -9,11 +9,10 @@ import {
 } from "react-router-dom";
 import Home from './Components/Home';
 import Navbar from './Components/Navbar/Navbar';
+import AssistantDashboard from './Components/Dashboard/AssistantDashboard';
+import VerifierDashboard from './Components/Dashboard/VerifierDashboard';
 function App() {
-  const [isopen, setisopen] = useState(false)
-  const toggle = () => {
-    setisopen(!isopen)
-  }
+ 
 
   return (
     <>
@@ -24,6 +23,12 @@ function App() {
           </Route>
           <Route exact path="/home">
             <Home />
+          </Route>
+          <Route exact path="/assistant">
+            <AssistantDashboard />
+          </Route>
+          <Route exact path="/verifier">
+            <VerifierDashboard />
           </Route>
           </Switch>
     </>
