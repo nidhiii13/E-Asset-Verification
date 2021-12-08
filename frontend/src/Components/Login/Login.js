@@ -20,13 +20,18 @@ const Login = () => {
     }
     setPassword("");
     setUsername("");
+    setType("");
 
        axios.post("http://127.0.0.1:8000/login",data,{headers: {
          'Content-Type' : 'application/json' 
     }})
     .then((res) => {
-        console.log("RESPONSE RECEIVED: ", (res));
-        history.push('/home');
+        console.log("RESPONSE RECEIVED: ", (res.data));
+         localStorage.setItem('token', res.data.token);
+         if (res.data.type=='assistant')
+        history.push('/assistant');
+        else
+        history.push('/verifier');
         
       })
       .catch((err) => {
@@ -59,3 +64,4 @@ const Login = () => {
     }
 
 export default Login;
+

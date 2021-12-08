@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'usermodel.apps.UsermodelConfig',
     'rest_framework',
     'rest_framework.authtoken',
-    'corsheaders'
+    'corsheaders',
+    'barcode'
 ]
 
 MIDDLEWARE = [
