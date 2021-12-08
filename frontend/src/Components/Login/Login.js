@@ -45,10 +45,12 @@ const Login = () => {
       <input type="text" placeholder="username" onChange={e=>setUsername(e.target.value)} value={username} required/>
       <input type="password" placeholder="password" onChange={e=>setPassword(e.target.value)} value={password} required />
       <div className="radio_button">
-                    <input type="radio" className="form-check-input" id="radio1" name="optradio" onClick={()=>setType("verifier")} value="Asset_verifier" checked/>Asset-Verifier    
-                    <label class="form-check-label" for="radio1"></label>
-                    <input type="radio" class="form-check-input" id="radio2" name="optradio" onClick={()=>setType("assistant")} value="Assistant"/>    Assistant
-                    <label class="form-check-label" for="radio2"></label>
+                    <label class="form-check-label" for="radio1">
+                    <input type="radio" className="form-check-input" id="radio1" name="optradio" onClick={()=>setType("verifier")} value="Asset_verifier" checked/>Asset-Verifier   
+                    </label>
+                    <label class="form-check-label" for="radio2">
+                    <input type="radio" class="form-check-input" id="radio2" name="optradio" onClick={()=>setType("assistant")} value="Assistant"/>Assistant
+                    </label>
                 </div>
       <button>Login</button>
     </form>  
