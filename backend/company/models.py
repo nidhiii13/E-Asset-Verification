@@ -12,4 +12,4 @@ class Company(models.Model):
         db_table='company'
 
     def __str__(self):
-        return self.company_id
+        return str(self.company_id)

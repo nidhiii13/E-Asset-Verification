@@ -20,5 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('accounts.urls')),
     path('user/',include('usermodel.urls')),
-    path('bar/',include('asset.urls'))
+    path('bar/',include('asset.urls')),
+    path('company/',include('company.urls')),
+    path('location/',include('location.urls')),
 ]
