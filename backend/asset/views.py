@@ -4,6 +4,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.response import Response
+from .models import Asset
 import barcode
 from barcode import EAN13
 # Create your views here.
@@ -23,3 +24,13 @@ def barcode_generate(request):
     return Response({'msg':'success'})
         
 
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((IsAuthenticated,))
+def found_status_update(request):
+    barcode_no=request.data.get('barcode_id')
+    query=Asset.objects.get(barcode_id=barcode_no)
+    query.found_status=True
+    query.save()
+
+    return Response({'msg':'success'})
