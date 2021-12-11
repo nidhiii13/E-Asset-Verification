@@ -10,3 +10,6 @@ class Company(models.Model):
 
     class Meta:
         db_table='company'
+
+    def __str__(self):
+        return str(self.company_id)

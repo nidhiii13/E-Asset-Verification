@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
-
+from location.models import Location
 from company.models import Company
 
 
@@ -13,8 +13,11 @@ class Asset(models.Model):
     capitalized_date=models.DateField()
     found_status=models.BooleanField(default=False)
     company_id=models.ForeignKey(Company,max_length=20,on_delete=models.CASCADE)
+    room_no=models.ForeignKey(Location,on_delete=models.CASCADE,default=None)
 
     class Meta:
         db_table='asset'
-
+    
+    def __str__(self) :
+        return self.asset_id
 
