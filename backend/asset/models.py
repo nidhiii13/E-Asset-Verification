@@ -10,7 +10,7 @@ class Asset(models.Model):
     barcode_id=models.CharField(max_length=20,unique=True)
     cost_center=models.CharField(max_length=20)
     asset_description=models.TextField()
-    capitalized_date=models.DateField()
+    capitalized_date=models.DateField(default=None)
     found_status=models.BooleanField(default=False)
     company_id=models.ForeignKey(Company,max_length=20,on_delete=models.CASCADE)
     room_no=models.ForeignKey(Location,on_delete=models.CASCADE,default=None)

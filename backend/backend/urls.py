@@ -23,4 +23,5 @@ urlpatterns = [
     path('bar/',include('asset.urls')),
     path('company/',include('company.urls')),
     path('location/',include('location.urls')),
+    path('service/',include('service.urls')),
 ]
