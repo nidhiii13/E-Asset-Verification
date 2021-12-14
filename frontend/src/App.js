@@ -11,6 +11,7 @@ import Home from './Components/Home';
 import Navbar from './Components/Navbar/Navbar';
 import AssistantDashboard from './Components/Dashboard/AssistantDashboard';
 import VerifierDashboard from './Components/Dashboard/VerifierDashboard';
+import Verifierhome from './Components/Verifier/VerifierHome';
 function App() {
  
 
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route exact path="/verifier">
             <VerifierDashboard />
+          </Route>
+          <Route exact path="/verifierhome">
+            <Verifierhome />
           </Route>
           </Switch>
     </>

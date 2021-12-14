@@ -1,5 +1,6 @@
 import React from 'react'
 import "./Dashboard.css"
+import { Link } from 'react-router-dom'
 const VerifierDashboard = () => {
     return (
         <>
@@ -23,9 +24,10 @@ const VerifierDashboard = () => {
                                 </a>
                             </li>
                             <li>
-                                <a className="s-sidebar__nav-link" href="#0">
+                                <Link to="/verifierhome"className="s-sidebar__nav-link" > 
                                     <i className="fa fa-camera"></i><em>Asset Verification</em>
-                                </a>
+                                    </Link>
+                                
                             </li>
                             <li>
                                 <a className="s-sidebar__nav-link" href="#0">

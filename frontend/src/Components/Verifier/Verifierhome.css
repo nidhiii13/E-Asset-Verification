@@ -1,0 +1,11 @@
+.barcode_block{
+    left: 450px;
+  top: 200px;
+   position: absolute;
+   font-size: 18px;
+  }
+  .h1block_home{
+    position: relative;
+    top: -650px;
+    left: 650px;
+  }

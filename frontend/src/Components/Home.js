@@ -1,7 +1,9 @@
 import React from 'react'
+import './Home.css'
 import { useEffect } from 'react';
 import { useState } from 'react';
-import xlsx from 'xlsx'
+import xlsx from 'xlsx';
+import axios from 'axios';
 import AssistantDashboard from './Dashboard/AssistantDashboard';
 const Home = () => {
     useEffect(() => {
@@ -20,10 +22,10 @@ const Home = () => {
             const workbook = xlsx.read(data, { type: "array" });
             const sheetName = workbook.SheetNames[0];
             const worksheet = workbook.Sheets[sheetName];
-            const json = xlsx.utils.sheet_to_json(worksheet);
+            const json = xlsx.utils.sheet_to_json(worksheet,{raw: false});
             console.log(json);
             setSelectedFile(json);
-            json.map((e)=>{console.log(e.Asset);})
+            
         };
         reader.readAsArrayBuffer(e.target.files[0]);
     }
@@ -31,16 +33,31 @@ const Home = () => {
 	};
 
 	const handleSubmission = () => {
-        console.log(selectedFile);
+        axios.post("http://127.0.0.1:8000/bar/barcode",selectedFile,{headers: {
+         'Content-Type' : 'application/json' 
+    }})
+    .then((res) => {
+        console.log("RESPONSE RECEIVED: ", (res.data));
+      })
+      .catch((err) => {
+        console.log("AXIOS ERROR: ", err);
+      })
 	};
     return (
         <div>
-            <h1>WELCOME</h1>
             
-            <input type="file" name="file" onChange={changeHandler} />
-			<div>
-				<button onClick={handleSubmission}>Submit</button>
-			</div>
+            <AssistantDashboard />
+            
+            <div className='assistantblock'>
+            <h1 className='h1block_home'>WELCOME</h1>
+            <h2 className='h2block_home'>Upload the excel file</h2>          
+            <div className='input_home'><input type="file" name="file" onChange={changeHandler} /></div>
+			<div className='submit_home'>
+				<button className='button_home' onClick={handleSubmission}>Submit</button>
+			</div>  
+            
+            </div>
+            
         </div>
     )
 }

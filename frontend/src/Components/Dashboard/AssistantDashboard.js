@@ -47,9 +47,6 @@ const AssistantDashboard = () => {
                 </div>
 
             
-                <main className="s-layout__content">
-                    <h1>ASSITANT VIEW. PLEASE!</h1>
-                </main>
             </div>
         </>
     )

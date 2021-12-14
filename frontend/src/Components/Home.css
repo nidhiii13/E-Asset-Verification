@@ -1,0 +1,45 @@
+.assistantblock{
+
+    left: 500px;
+    top: 200px;
+     position: absolute;
+     font-size: 18px;
+  }
+  .imgclass{
+     width: 400px;
+     position: absolute;
+     top: 200px;
+     right: 16px;
+     font-size: 18px;
+   }
+   .h1block_home{
+     position: relative;
+     top: -50px;
+   }
+   .h2block_home{
+     position: relative;
+     left: -60px;
+   }
+   .submit_home{
+    position: relative;
+    top: 100px;
+    left: 20px;
+  
+   }
+   .button_home{
+     width: 100px;
+     height: 50px;
+    margin: 6px 2px;
+     background-color: #243e56;
+     color: white;
+   }
+   .button_home:hover{
+    color: black;
+    background-color: white;
+    border:  solid #243e56;
+   }
+   .input_home{
+     position: relative;
+     bottom: -40px;
+     left: -40px;
+   }
