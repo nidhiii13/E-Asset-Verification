@@ -48,7 +48,6 @@ const Dashboard = () => {
 
             
                 <main className="s-layout__content">
-                    <h1>ASSITANT VIEW. PLEASE!</h1>
                 </main>
             </div>
         </>
