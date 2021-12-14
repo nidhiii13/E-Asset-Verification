@@ -1,8 +1,9 @@
 import React from 'react'
 import "./Dashboard.css"
-const Dashboard = () => {
+const VerifierDashboard = () => {
     return (
         <>
+        
             <div className="s-layout">
 
                 <div className="s-layout__sidebar">
@@ -32,17 +33,22 @@ const Dashboard = () => {
                                     <i className="fa fa-camera"></i><em>Help</em>
                                 </a>
                             </li>
+                            <li>
+                                <a className="s-sidebar__nav-link" href="#0">
+                                    <i className="fa fa-camera"></i><em>Logout</em>
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
 
             
                 <main className="s-layout__content">
-                    <h1>Verifier VIEW. PLEASE!</h1>
+                   
                 </main>
             </div>
         </>
     )
 }
 
-export default Dashboard;
+export default VerifierDashboard;
