@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
 body {
-  background: var(--misty-rose);
+  background-color:#FFFFFF;
 }
 
 .login {
-  width: 360px;
-  padding: 8% 0 0;
+  width: 350px;
+  padding: 5% 0 0;
   margin: auto;
   font-family: 'Comfortaa', cursive;
 }
@@ -17,13 +17,11 @@ span{
   position: relative;
   z-index: 1;
   border-radius: 10px;
-  max-width: 350px;
+  max-width: 360px;
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;
   background-color:var(--midnight-blue);
-  block-size: auto;
-  writing-mode: horizontal-tb;
 }
 
 .form input {
@@ -70,7 +68,6 @@ span{
 }
 .radio_button{
   color: aliceblue;
-  
 }
 
 
