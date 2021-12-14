@@ -1,0 +1,28 @@
+#scanner-container {
+    position: relative;
+  }
+
+  .drawingBuffer {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .h3_barcode_block{
+      position: absolute;
+      left: -100px;
+      top: -20px;
+      display: inline-flex;
+  }
+  .code_block{
+    position: relative;
+    top: 5px;
+    right: -400px;
+    padding-left: 100px;
+  }
+  .button_barcode_block{
+      position: relative;
+      right: -220px;
+      top: 10px;
+      padding-top: 20px;
+      padding-bottom: 10px;
+  }
