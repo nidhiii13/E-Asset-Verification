@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Home from './Components/Home';
 import Navbar from './Components/Navbar/Navbar';
+import Verifierhome from './Components/Verifierhome';
 function App() {
   const [isopen, setisopen] = useState(false)
   const toggle = () => {
@@ -24,6 +25,9 @@ function App() {
           </Route>
           <Route exact path="/home">
             <Home />
+          </Route>
+          <Route exact path="/Verifierhome">
+            <Verifierhome />
           </Route>
           </Switch>
     </>
