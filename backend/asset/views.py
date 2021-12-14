@@ -24,6 +24,8 @@ def barcode_generate(request):
         if serializer.is_valid():
             serializer.save()
             return Response({'msg1':'success'})
+        else:
+            return Response({'msg1':'fail'})
 
         name=i['asset_id']
         code.save(r'C:\\Users\\nidhi\\Downloads\\barcode'+name)
