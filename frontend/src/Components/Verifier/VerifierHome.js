@@ -7,7 +7,6 @@ const Verifierhome = () => {
     return (
         <div>
             <VerifierDashboard />
-            
             <div className='barcode_block'><Barcode /></div>
         </div>
     )

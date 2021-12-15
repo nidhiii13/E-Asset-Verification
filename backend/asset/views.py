@@ -47,7 +47,6 @@ def barcode_generate(request):
 
 @csrf_exempt
 @api_view(["POST"])
-@permission_classes((IsAuthenticated,))
 def found_status_update(request):
     barcode_no=request.data.get('barcode_id')
     query=Asset.objects.get(barcode_id=barcode_no)

@@ -12,6 +12,7 @@ import Navbar from './Components/Navbar/Navbar';
 import AssistantDashboard from './Components/Dashboard/AssistantDashboard';
 import VerifierDashboard from './Components/Dashboard/VerifierDashboard';
 import Verifierhome from './Components/Verifier/VerifierHome';
+import Company from './Components/Company/Company';
 function App() {
  
 
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route exact path="/verifierhome">
             <Verifierhome />
+          </Route>
+          <Route exact path="/addcompany">
+            <Company />
           </Route>
           </Switch>
     </>

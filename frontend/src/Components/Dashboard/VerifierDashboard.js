@@ -39,9 +39,7 @@ const VerifierDashboard = () => {
                 </div>
 
             
-                <main className="s-layout__content">
-                    <h1>Verifier VIEW. PLEASE!</h1>
-                </main>
+                
             </div>
         </>
     )

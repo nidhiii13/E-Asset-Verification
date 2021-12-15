@@ -1,5 +1,6 @@
 import React from 'react'
-import "./Dashboard.css"
+import "./Dashboard.css";
+import { Link } from 'react-router-dom'
 const AssistantDashboard = () => {
     return (
         <>
@@ -13,19 +14,19 @@ const AssistantDashboard = () => {
                     <nav className="s-sidebar__nav">
                         <ul>
                             <li>
-                                <a className="s-sidebar__nav-link" href="#0">
-                                    <i className="fa fa-home"></i><em>Home</em>
-                                </a>
+                            <Link to="/home"className="s-sidebar__nav-link" > 
+                                    <i className="fa fa-camera"></i><em>Home</em>
+                                    </Link>
                             </li>
                             <li>
                                 <a className="s-sidebar__nav-link" href="#0">
-                                    <i className="fa fa-user"></i><em>Genrate Barcode</em>
+                                    <i className="fa fa-user"></i><em>Generate Barcode</em>
                                 </a>
                             </li>
                             <li>
-                                <a className="s-sidebar__nav-link" href="#0">
-                                    <i className="fa fa-camera"></i><em>Company Stats</em>
-                                </a>
+                            <Link to="/addcompany"className="s-sidebar__nav-link" > 
+                                    <i className="fa fa-camera"></i><em>Company stats</em>
+                                    </Link>
                             </li>
                             <li>
                                 <a className="s-sidebar__nav-link" href="#0">
