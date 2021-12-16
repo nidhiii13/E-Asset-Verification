@@ -15,7 +15,6 @@ from rest_framework.status import (
 # Create your views here.
 @csrf_exempt
 @api_view(["POST"])
-@permission_classes((IsAuthenticated,))
 def add_location(request):
     try:
         incharge_id=UserModel.objects.get(SSN=request.data.get('incharge'))

@@ -38,9 +38,12 @@ const Home = () => {
     }})
     .then((res) => {
         console.log("RESPONSE RECEIVED: ", (res.data));
+        setSelectedFile("");
       })
       .catch((err) => {
         console.log("AXIOS ERROR: ", err);
+        setSelectedFile("");
+
       })
 	};
     return (
@@ -48,12 +51,12 @@ const Home = () => {
             
             <AssistantDashboard />
             
-            <div className='assistantblock'>
-            <h1 className='h1block_home'>WELCOME</h1>
-            <h2 className='h2block_home'>Upload the excel file</h2>          
-            <div className='input_home'><input type="file" name="file" onChange={changeHandler} /></div>
-			<div className='submit_home'>
-				<button className='button_home' onClick={handleSubmission}>Submit</button>
+            <div className='assistantblock1'>
+            
+            <h2 className='h2block_home1'>Upload the excel file</h2>          
+            <div className='input_home1'><input type="file" name="file" onChange={changeHandler} /></div>
+			<div className='submit_home1'>
+				<button className='button_home1' onClick={handleSubmission}>Submit</button>
 			</div>  
             
             </div>

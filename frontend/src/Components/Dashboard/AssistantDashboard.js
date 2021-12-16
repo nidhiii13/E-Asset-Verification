@@ -19,9 +19,9 @@ const AssistantDashboard = () => {
                                     </Link>
                             </li>
                             <li>
-                                <a className="s-sidebar__nav-link" href="#0">
-                                    <i className="fa fa-user"></i><em>Generate Barcode</em>
-                                </a>
+                            <Link to="/home"className="s-sidebar__nav-link" > 
+                                    <i className="fa fa-camera"></i><em>Generate Barcode</em>
+                                    </Link>
                             </li>
                             <li>
                             <Link to="/addcompany"className="s-sidebar__nav-link" > 
@@ -29,9 +29,9 @@ const AssistantDashboard = () => {
                                     </Link>
                             </li>
                             <li>
-                                <a className="s-sidebar__nav-link" href="#0">
-                                    <i className="fa fa-camera"></i><em>Location Details</em>
-                                </a>
+                            <Link to="/addlocation"className="s-sidebar__nav-link" > 
+                                    <i className="fa fa-camera"></i><em>Location details</em>
+                                    </Link>
                             </li>
                             <li>
                                 <a className="s-sidebar__nav-link" href="#0">

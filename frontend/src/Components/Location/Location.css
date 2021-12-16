@@ -1,6 +1,6 @@
-.assistantblock1{
+.assistantblock{
 
-    left: 500px;
+    left: 280px;
     top: 200px;
      position: absolute;
      font-size: 18px;
@@ -12,34 +12,37 @@
      right: 16px;
      font-size: 18px;
    }
-   .h1block_home1{
+   .h1block_home{
      position: relative;
      top: -50px;
    }
-   .h2block_home1{
+   .h2block_home{
      position: relative;
      left: -60px;
    }
-   .submit_home1{
+   .submit_home{
     position: relative;
     top: 100px;
     left: 20px;
   
    }
-   .button_home1{
+   .button_home{
      width: 100px;
      height: 50px;
     margin: 6px 2px;
      background-color: #243e56;
      color: white;
    }
-   .button_home1:hover{
+   .button_home:hover{
     color: black;
     background-color: white;
     border:  solid #243e56;
    }
-   .input_home1{
+   .input_home{
      position: relative;
      bottom: -40px;
      left: -40px;
    }
+.input{
+    width: 150px;
+}
