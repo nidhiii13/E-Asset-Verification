@@ -35,7 +35,7 @@ const Barcode = (props) => {
       "barcode_id":barcode
     }
     setBarcode("");
-    axios.post("http://127.0.0.1:8000/bar/updatestatus",data,{headers: {
+    axios.post("http://127.0.0.1:8000/asset/updatestatus",data,{headers: {
          'Content-Type' : 'application/json' 
     }})
     .then((res) => {

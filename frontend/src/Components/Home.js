@@ -33,7 +33,7 @@ const Home = () => {
 	};
 
 	const handleSubmission = () => {
-        axios.post("http://127.0.0.1:8000/bar/barcode",selectedFile,{headers: {
+        axios.post("http://127.0.0.1:8000/asset/barcode",selectedFile,{headers: {
          'Content-Type' : 'application/json' 
     }})
     .then((res) => {

@@ -15,7 +15,7 @@ from barcode import EAN13
 import string
 import random
 # Create your views here.
-d={}
+
 @csrf_exempt
 @api_view(["POST"])
 def barcode_generate(request):
@@ -27,7 +27,7 @@ def barcode_generate(request):
         res = ''.join(random.choices(string.digits, k = N))
         number=str(res)
         code=EAN13(number)
-        i['barcode_id']=number
+        print(code)
         date=i['capitalized_date']
         l=date.split('/')
         l.reverse()
@@ -47,8 +47,7 @@ def barcode_generate(request):
         else:
             return Response({'msg1':'fail'})
         name=i['asset_id']
-        d[i['asset_id']]=str(code)
-        print(d)
+        barcode=Barcode.objects.create(asset_id=name,barcode_id=str(code))
         code.save(r'C:\\Users\\nidhi\\Downloads\\barcode'+name)
 
     return Response({'msg2':'success'})
@@ -70,14 +69,11 @@ def asset_company_loc(request):
     asset = request.data.get('asset_id')
     company = request.data.get('company_id')
     location = request.data.get('location')
-    print(d)
     barcode= Barcode.objects.get(asset_id=asset).barcode_id
     print(type(barcode))
     print(company)
     query = SAP_Asset.objects.get(asset_id=asset)
     company_id = Company.objects.get(company_id=company)
-    """ for comp in company_id:
-        print(comp.company_id== str(company)) """
     room_no=Location.objects.get(room_no=location)
     print(company_id.id) 
     print(room_no.id)
@@ -90,3 +86,9 @@ def asset_company_loc(request):
         return Response({'msg':'failure'}) 
 
 
+@csrf_exempt
+@api_view(["GET"])
+def verification_process(request):
+    query = Asset.objects.filter(found_status=True)
+    serializer=AssetSerializer(instance=query,many=True)
+    return Response(serializer.data)
