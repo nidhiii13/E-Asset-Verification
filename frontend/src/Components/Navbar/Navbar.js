@@ -2,7 +2,11 @@ import React from 'react';
 import  "./Navbar.css"
 const Navbar = () => {
     return (
-        <><div class="nav">
+        <>
+        <div className="header">
+          <p></p>
+        </div>
+        <div class="nav">
         <input type="checkbox" id="nav-check" />
         <div class="nav-header">
           <div class="nav-title">

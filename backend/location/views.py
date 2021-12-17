@@ -15,7 +15,6 @@ from rest_framework.status import (
 # Create your views here.
 @csrf_exempt
 @api_view(["POST"])
-@permission_classes((IsAuthenticated,))
 def add_location(request):
     try:
         incharge_id=UserModel.objects.get(SSN=request.data.get('incharge'))
@@ -26,5 +25,5 @@ def add_location(request):
     request.data['incharge']=incharge_id.id
     serializer=LocationSerializer(data=request.data)
     if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
+        serializer.save()
+        return Response(serializer.data)
