@@ -44,13 +44,13 @@ const Company = () => {
             <h2 className='h2block_home'>Add company details</h2>          
             <div className='input_home'>
                 
-                <input type="text" name="file" placeholder='company id' className='input' value={cid} onChange={(e)=>setCid(e.target.value)}/* onChange={changeHandler} */ />
+                <input type="text" name="file" placeholder='company id' className='input' value={cid} onChange={(e)=>setCid(e.target.value)} required />
 			
-            <input type="text" name="file" placeholder='company name' className='input' value={cname} onChange={(e)=>setCname(e.target.value)}/* onChange={changeHandler} */ />
+            <input type="text" name="file" placeholder='company name' className='input' value={cname} onChange={(e)=>setCname(e.target.value)} />
 			
-            <input type="text" name="file" placeholder='company email' className='input' value={cmail} onChange={(e)=>setCmail(e.target.value)} /* onChange={changeHandler} */ />
-            <input type="text" name="file" placeholder='company location' className='input' value={cloc} onChange={(e)=>setCloc(e.target.value)}/* onChange={changeHandler} */ />
-            <input type="text" name="file" placeholder='company no' className='input' value={cph} onChange={(e)=>setCph(e.target.value)}/* onChange={changeHandler} */ />
+            <input type="text" name="file" placeholder='company email' className='input' value={cmail} onChange={(e)=>setCmail(e.target.value)}  />
+            <input type="text" name="file" placeholder='company location' className='input' value={cloc} onChange={(e)=>setCloc(e.target.value)} />
+            <input type="text" name="file" placeholder='company no' className='input' value={cph} onChange={(e)=>setCph(e.target.value)} />
             <div className='submit_home'>
 				<button className='button_home'  onClick={handleSubmit} >Submit</button>
                 

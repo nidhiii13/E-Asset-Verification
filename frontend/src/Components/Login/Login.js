@@ -3,11 +3,16 @@ import "./login.css";
 import axios from 'axios';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Navbar from '../Navbar/Navbar';
+import { loginUser } from '../../Redux/User';
+
 const Login = () => {
-    let history = useHistory();
+   let history = useHistory();
+   const dispatch = useDispatch();
+
    const [flag,setFlag]=useState(false);
-   const [type,setType]=useState("");
+   const [type,setType]=useState("verifier");
    const [username,setUsername]=useState("");
    const [password,setPassword]=useState("");
    const handleSubmit=(event)=>{
@@ -20,7 +25,7 @@ const Login = () => {
     }
     setPassword("");
     setUsername("");
-    setType("");
+    setType("verifier");
 
        axios.post("http://127.0.0.1:8000/login",data,{headers: {
          'Content-Type' : 'application/json' 
@@ -28,6 +33,14 @@ const Login = () => {
     .then((res) => {
         console.log("RESPONSE RECEIVED: ", (res.data));
          localStorage.setItem('token', res.data.token);
+         localStorage.setItem('loggedIn',res.data.token !== undefined);
+         localStorage.setItem('userType', res.data.type);
+         const info = {
+         token: res.data.token,
+         isLoggedIn: res.data.token !== undefined,
+         userType: res.data.type
+         }
+         dispatch(loginUser(info));
          if (res.data.type=='assistant')
         history.push('/assistant');
         else
