@@ -84,13 +84,14 @@ const Companystats = () => {
     setEditContactId(null);
   };
 
-  const handleDeleteClick = (contactId) => {
+  const handleDeleteClick = async(contactId) => {
     const newContacts = [...contacts];
 
-    const index = contacts.findIndex((contact) => contact.id === contactId);
+    const index = contacts.findIndex((contact) => contact.company_id === contactId);
 
     newContacts.splice(index, 1);
-
+     const req= await axios.delete('http://127.0.0.1:8000/company/delete/'+contactId);
+     console.log(req);
     setContacts(newContacts);
     console.log(typeof(contacts))
   };
