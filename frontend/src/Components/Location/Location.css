@@ -1,7 +1,7 @@
 .assistantblock{
 
   left: 450px;
-  top: 200px;
+  top: 150px;
    position: absolute;
    font-size: 18px;
 }
@@ -18,7 +18,7 @@
  }
  .submit_home{
   position: relative;
-  top: 100px;
+  top: 10px;
   left: 45%;
 
  }
@@ -36,6 +36,7 @@
  }
  .input_home{
    position: relative;
+   top: -5px;
    bottom: -40px;
    
  }
