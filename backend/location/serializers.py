@@ -7,3 +7,4 @@ class LocationSerializer(ModelSerializer):
         model=Location
         depth = 1
         fields='__all__'
+    
