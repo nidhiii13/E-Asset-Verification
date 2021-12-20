@@ -1,28 +1,33 @@
-  import React, { useState, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import { nanoid } from "nanoid";
-import "./Companystats.css";
-import data from "./mock-data.json";
+import "./Locationstats.css";
 import EditableRow from "./EditableRow";
 import ReadOnlyRow from "./ReadOnlyRow";
-
+import axios from "axios";
+import { useEffect } from "react";
+import { stream } from "xlsx";
 const Companystats = () => {
-  const [contacts, setContacts] = useState(data);
-  const [addFormData, setAddFormData] = useState({
-    fullName: "",
-    address: "",
-    phoneNumber: "",
-    email: "",
-  });
+
+  const [flag,setFlag]= useState(false);
+  const [contacts, setContacts] = useState({});
 
   const [editFormData, setEditFormData] = useState({
-    fullName: "",
-    address: "",
-    phoneNumber: "",
-    email: "",
+    name: "",
+    room_no: "",
+    list_assets:"",
+    incharge: ""
   });
 
   const [editContactId, setEditContactId] = useState(null);
 
+  useEffect(async() => {
+    const res=await axios.get('http://127.0.0.1:8000/company/add');
+    console.log(res.data);
+    setContacts(res.data);
+    setFlag(true);
+    console.log(typeof(contacts))
+    
+  }, [])
 
   const handleEditFormChange = (event) => {
     event.preventDefault();
@@ -35,36 +40,38 @@ const Companystats = () => {
 
     setEditFormData(newFormData);
   };
-  const handleEditFormSubmit = (event) => {
+  const handleEditFormSubmit = async (event) => {
     event.preventDefault();
 
     const editedContact = {
-      id: editContactId,
-      fullName: editFormData.fullName,
-      address: editFormData.address,
-      phoneNumber: editFormData.phoneNumber,
-      email: editFormData.email,
+        name: editFormData.name,
+        room_no: editFormData.room_no,
+        list_assets: editFormData.list_assets,
+        incharge: editFormData.incharge
+     
     };
 
     const newContacts = [...contacts];
 
-    const index = contacts.findIndex((contact) => contact.id === editContactId);
-
+    const index = contacts.findIndex((contact) => contact.room_no === editFormData.room_no);
     newContacts[index] = editedContact;
-
+     console.log(newContacts[index].room_no);
+     const pk =newContacts[index].room_no
     setContacts(newContacts);
     setEditContactId(null);
+    const req=await axios.put('http://127.0.0.1:8000/company/edit/'+pk,editedContact);
+    console.log(req);
   };
 
   const handleEditClick = (event, contact) => {
     event.preventDefault();
-    setEditContactId(contact.id);
+    setEditContactId(contact.room_no);
 
     const formValues = {
-      fullName: contact.fullName,
-      address: contact.address,
-      phoneNumber: contact.phoneNumber,
-      email: contact.email,
+        name: contact.name,
+        room_no: contact.room_no,
+        list_assets: contact.list_assets,
+        incharge: contact.list_assets
     };
 
     setEditFormData(formValues);
@@ -74,14 +81,16 @@ const Companystats = () => {
     setEditContactId(null);
   };
 
-  const handleDeleteClick = (contactId) => {
+  const handleDeleteClick = async(contactId) => {
     const newContacts = [...contacts];
 
-    const index = contacts.findIndex((contact) => contact.id === contactId);
+    const index = contacts.findIndex((contact) => contact.company_id === contactId);
 
     newContacts.splice(index, 1);
-
+     const req= await axios.delete('http://127.0.0.1:8000/company/delete/'+contactId);
+     console.log(req);
     setContacts(newContacts);
+    console.log(typeof(contacts))
   };
 
   return (
@@ -91,18 +100,17 @@ const Companystats = () => {
         <table>
           <thead>
             <tr>
-              <th>Company ID</th>
-              <th>Company Name</th>
-              <th>Email</th>
-              <th>Location</th>
-              <th>Contact No</th>
+              <th>Name</th>
+              <th>Room No</th>
+              <th>Asset List</th>
+              <th>Incharge</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {contacts.map((contact) => (
+            {flag && contacts.map((contact) => (
               <Fragment>
-                {editContactId === contact.id ? (
+                {editContactId === contact.company_id ? (
                   <EditableRow
                     editFormData={editFormData}
                     handleEditFormChange={handleEditFormChange}
@@ -116,7 +124,7 @@ const Companystats = () => {
                   />
                 )}
               </Fragment>
-            ))}
+            ))} 
           </tbody>
         </table>
       </form>

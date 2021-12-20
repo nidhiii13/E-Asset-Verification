@@ -1,6 +1,4 @@
 import React from 'react'
-import Company from '../Company/Company';
-
 import { useState } from 'react';
 import axios from 'axios';
 import AssistantDashboard from '../Dashboard/AssistantDashboard';
