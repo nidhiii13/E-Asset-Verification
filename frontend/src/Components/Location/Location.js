@@ -2,12 +2,17 @@ import React from 'react'
 import './Location.css';
 import { useState } from 'react';
 import axios from 'axios';
+import { useEffect } from 'react';
 import AssistantDashboard from '../Dashboard/AssistantDashboard';
 const Location = () => {
     const [name,setName]=useState("");
     const [room,setRoom]=useState("");
     const [list,setList]=useState(null);
     const [incharge,setIncharge]=useState("");
+    useEffect(async() => {
+      const res=await axios.get('http://127.0.0.1:8000/location/getloc');
+      console.log(res);
+    }, [])
     const handleSubmit=(e)=>{
         e.preventDefault();
         var data={

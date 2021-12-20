@@ -3,7 +3,6 @@ from rest_framework.decorators import api_view,permission_classes
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.serializers import Serializer
-
 from .serializers import LocationSerializer
 from .models import Location, UserModel
 from rest_framework.response import Response
@@ -27,3 +26,22 @@ def add_location(request):
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
+
+@csrf_exempt
+@api_view(["PUT"])
+def edit_location(request,pk):
+    query = Location.objects.get(room_no=pk)
+    serializer=LocationSerializer(query,data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    else:
+        return Response({'msg':'fail'})
+    return Response(serializer.data)
+
+@csrf_exempt
+@api_view(["GET"])
+def get_location(request):
+    query = Location.objects.all()
+    serializer=LocationSerializer(query,many=True)
+    return Response(serializer.data)
+    
