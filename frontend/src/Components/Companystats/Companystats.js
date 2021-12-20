@@ -87,8 +87,8 @@ const Companystats = () => {
   return (
     <div className="app-container">
         <h1 className="stats_head">Company Stats</h1>
-      <form onSubmit={handleEditFormSubmit}>
-        <table>
+      <form className="stats_form" onSubmit={handleEditFormSubmit}>
+        <table className="stats_table">
           <thead>
             <tr>
               <th>Company ID</th>

@@ -1,11 +1,10 @@
 import React, { useState, Fragment } from "react";
 import { nanoid } from "nanoid";
 import "./Locationstats.css";
+import data from "./mock-data.json";
 import EditableRow from "./EditableRow";
 import ReadOnlyRow from "./ReadOnlyRow";
-import axios from "axios";
 import { useEffect } from "react";
-import { stream } from "xlsx";
 const Companystats = () => {
 
   const [flag,setFlag]= useState(false);
@@ -21,9 +20,9 @@ const Companystats = () => {
   const [editContactId, setEditContactId] = useState(null);
 
   useEffect(async() => {
-    const res=await axios.get('http://127.0.0.1:8000/company/add');
-    console.log(res.data);
-    setContacts(res.data);
+    //const res=await axios.get('http://127.0.0.1:8000/company/add');
+    //console.log(res.data);
+    //setContacts(res.data);
     setFlag(true);
     console.log(typeof(contacts))
     
@@ -59,8 +58,8 @@ const Companystats = () => {
      const pk =newContacts[index].room_no
     setContacts(newContacts);
     setEditContactId(null);
-    const req=await axios.put('http://127.0.0.1:8000/company/edit/'+pk,editedContact);
-    console.log(req);
+    //const req=await axios.put('http://127.0.0.1:8000/company/edit/'+pk,editedContact);
+    //console.log(req);
   };
 
   const handleEditClick = (event, contact) => {
@@ -84,11 +83,11 @@ const Companystats = () => {
   const handleDeleteClick = async(contactId) => {
     const newContacts = [...contacts];
 
-    const index = contacts.findIndex((contact) => contact.company_id === contactId);
+    const index = contacts.findIndex((contact) => contact.room_no === contactId);
 
     newContacts.splice(index, 1);
-     const req= await axios.delete('http://127.0.0.1:8000/company/delete/'+contactId);
-     console.log(req);
+     //const req= await axios.delete('http://127.0.0.1:8000/company/delete/'+contactId);
+     //console.log(req);
     setContacts(newContacts);
     console.log(typeof(contacts))
   };
@@ -96,7 +95,7 @@ const Companystats = () => {
   return (
     <div className="app-container">
         <h1 className="stats_head">Company Stats</h1>
-      <form onSubmit={handleEditFormSubmit}>
+      <form className="stats_form" onSubmit={handleEditFormSubmit}>
         <table>
           <thead>
             <tr>
@@ -108,9 +107,9 @@ const Companystats = () => {
             </tr>
           </thead>
           <tbody>
-            {flag && contacts.map((contact) => (
+            {contacts.map((contact) => (
               <Fragment>
-                {editContactId === contact.company_id ? (
+                {editContactId === contact.room_no ? (
                   <EditableRow
                     editFormData={editFormData}
                     handleEditFormChange={handleEditFormChange}
