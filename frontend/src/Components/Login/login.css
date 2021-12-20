@@ -60,7 +60,25 @@ span{
 .form button {
    font-weight: bolder;
 }
+#radio1{
+  position:absolute;
+  right: 50%;
+}
+.form-check-label1{
+  position: relative;
+  right: 60px;
+}
 
+#radio2{
+  position: relative;
+ left: 10%;
+ top: -13px;
+}
+.form-check-label2{
+  position: relative;
+  left: 80px;
+  top: -43px;
+}
 .form span {
   font-size: 2rem;
   font-weight: bolder;
@@ -68,6 +86,8 @@ span{
 }
 .radio_button{
   color: aliceblue;
+  position: relative;
+  top: 10px;
 }
 
 
