@@ -102,7 +102,7 @@ const Locationstats = () => {
   return (
     <div className="app-container">
         <h1 className="stats_head">Location Stats</h1>
-      <form onSubmit={handleEditFormSubmit}>
+      <form className="stats_form" onSubmit={handleEditFormSubmit}>
         <table>
           <thead>
             <tr>

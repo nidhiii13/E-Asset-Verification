@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import { Redirect } from 'react-router-dom';
 import Companystats from './Components/CompanyStats/Companystats';
 import Locationstats from './Components/LocationStats/Locationstats';
+import Update from './Components/UpdateAsset/Update';
 function App() {
      const info = useSelector((state) => state.User.info);
   return (
@@ -36,6 +37,9 @@ function App() {
             </Route>
             <Route exact path="/addcompany">
             <Company />
+          </Route>
+          <Route exact path="/asset/link">
+            <Update />
           </Route>
           <Route exact path="/companystats">
             <Companystats />

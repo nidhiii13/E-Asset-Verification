@@ -33,12 +33,12 @@ const AssistantDashboard = () => {
                         <ul>
                             <li>
                             <Link to="/home"className="s-sidebar__nav-link" > 
-                                    <i className="fa fa-camera"></i><em>Home</em>
+                                    <i className="fa fa-camera"></i><em>Generate Barcode</em>
                                     </Link>
                             </li>
                             <li>
-                            <Link to="/home"className="s-sidebar__nav-link" > 
-                                    <i className="fa fa-camera"></i><em>Generate Barcode</em>
+                            <Link to="/asset/link"className="s-sidebar__nav-link" > 
+                                    <i className="fa fa-camera"></i><em>Link Asset details</em>
                                     </Link>
                             </li>
                             <li>
@@ -58,7 +58,7 @@ const AssistantDashboard = () => {
                             </li>
                             <li>
                                 <a className="s-sidebar__nav-link" href="#0">
-                                   <button onClick={handleSubmit} >Logout </button>
+                                <i className="fa fa-camera"></i><em> <button className='logout' onClick={handleSubmit} >Logout </button></em>
                                 </a>
                             </li>
                         </ul>
