@@ -5,4 +5,6 @@ from .models import Location
 class LocationSerializer(ModelSerializer):
     class Meta:
         model=Location
+        depth = 1
         fields='__all__'
+    

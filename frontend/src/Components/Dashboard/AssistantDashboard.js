@@ -1,7 +1,25 @@
 import React from 'react'
 import "./Dashboard.css";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../Redux/User';
+import { useSelector } from 'react-redux';
 const AssistantDashboard = () => {
+     const user = useSelector(state => state.User.info);
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const handleSubmit = () =>{
+        const info={
+            isloggedIn: false
+        }
+        console.log(user.type);
+        localStorage.clear();
+        dispatch(logoutUser(info));
+
+        console.log('logout');
+        history.push('/');
+    }
     return (
         <>
             <div className="s-layout">
@@ -15,12 +33,12 @@ const AssistantDashboard = () => {
                         <ul>
                             <li>
                             <Link to="/home"className="s-sidebar__nav-link" > 
-                                    <i className="fa fa-camera"></i><em>Home</em>
+                                    <i className="fa fa-camera"></i><em>Generate Barcode</em>
                                     </Link>
                             </li>
                             <li>
-                            <Link to="/home"className="s-sidebar__nav-link" > 
-                                    <i className="fa fa-camera"></i><em>Generate Barcode</em>
+                            <Link to="/asset/link"className="s-sidebar__nav-link" > 
+                                    <i className="fa fa-camera"></i><em>Link Asset details</em>
                                     </Link>
                             </li>
                             <li>
@@ -40,7 +58,7 @@ const AssistantDashboard = () => {
                             </li>
                             <li>
                                 <a className="s-sidebar__nav-link" href="#0">
-                                    <i className="fa fa-camera"></i><em>Help</em>
+                                <i className="fa fa-camera"></i><em> <button className='logout' onClick={handleSubmit} >Logout </button></em>
                                 </a>
                             </li>
                         </ul>

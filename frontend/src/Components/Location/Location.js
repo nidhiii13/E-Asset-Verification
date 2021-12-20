@@ -40,13 +40,22 @@ const Location = () => {
             
             <h2 className='h2block_home'>Add Location details</h2>          
             <div className='input_home'>
-                
-                <input type="text" name="file" placeholder='location name' className='input' value={name} onChange={(e)=>setName(e.target.value)}/* onChange={changeHandler} */ />
-			
-            <input type="text" name="file" placeholder='room no' className='input' value={room} onChange={(e)=>setRoom(e.target.value)}/* onChange={changeHandler} */ />
-			
-            <input type="number" name="file" placeholder='no of assets' className='input' value={list} onChange={(e)=>setList(e.target.value)} /* onChange={changeHandler} */ />
-            <input type="text" name="file" placeholder='incharge SSN' className='input' value={incharge} onChange={(e)=>setIncharge(e.target.value)}/* onChange={changeHandler} */ />
+             <div className='textblock'><p>Location Name</p></div>   
+            <div className='inputblock'> 
+            <input type="text" name="file" className='input' value={name} onChange={(e)=>setName(e.target.value)}/* onChange={changeHandler} */ />
+			</div> 
+            <div className='textblock'><p>Room No</p></div> 
+            <div className='inputblock'> 
+            <input type="text" name="file"className='input' value={room} onChange={(e)=>setRoom(e.target.value)}/* onChange={changeHandler} */ />
+            </div> 
+            <div className='textblock'><p>No of Assets</p></div>  
+            <div className='inputblock'>
+            <input type="number" name="file" className='input' value={list} onChange={(e)=>setList(e.target.value)} /* onChange={changeHandler} */ />
+            </div>
+            <div className='textblock'><p>Incharge SSN</p></div>  
+            <div className='inputblock'>
+            <input type="text" name="file" className='input' value={incharge} onChange={(e)=>setIncharge(e.target.value)}/* onChange={changeHandler} */ />
+            </div>
                  <div className='submit_home'>
 				<button className='button_home'  onClick={handleSubmit} >Submit</button>
                 
