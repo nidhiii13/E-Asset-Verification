@@ -1,6 +1,7 @@
 import React from 'react'
-import "./Dashboard.css"
-const Dashboard = () => {
+import "./Dashboard.css";
+import { Link } from 'react-router-dom'
+const AssistantDashboard = () => {
     return (
         <>
             <div className="s-layout">
@@ -13,24 +14,24 @@ const Dashboard = () => {
                     <nav className="s-sidebar__nav">
                         <ul>
                             <li>
-                                <a className="s-sidebar__nav-link" href="#0">
-                                    <i className="fa fa-home"></i><em>Home</em>
-                                </a>
+                            <Link to="/home"className="s-sidebar__nav-link" > 
+                                    <i className="fa fa-camera"></i><em>Generate Barcode</em>
+                                    </Link>
                             </li>
                             <li>
-                                <a className="s-sidebar__nav-link" href="#0">
-                                    <i className="fa fa-user"></i><em>Genrate Barcode</em>
-                                </a>
+                            <Link to="/addcompany"className="s-sidebar__nav-link" > 
+                                    <i className="fa fa-camera"></i><em>Company stats</em>
+                                    </Link>
                             </li>
                             <li>
-                                <a className="s-sidebar__nav-link" href="#0">
-                                    <i className="fa fa-camera"></i><em>Company Stats</em>
-                                </a>
+                            <Link to="/addlocation"className="s-sidebar__nav-link" > 
+                                    <i className="fa fa-camera"></i><em>Location details</em>
+                                    </Link>
                             </li>
                             <li>
-                                <a className="s-sidebar__nav-link" href="#0">
-                                    <i className="fa fa-camera"></i><em>Location Details</em>
-                                </a>
+                            <Link to="/update"className="s-sidebar__nav-link" > 
+                                    <i className="fa fa-camera"></i><em>Update</em>
+                                    </Link>
                             </li>
                             <li>
                                 <a className="s-sidebar__nav-link" href="#0">
@@ -38,20 +39,18 @@ const Dashboard = () => {
                                 </a>
                             </li>
                             <li>
-                                <a className="s-sidebar__nav-link" href="#0">
+                            <Link to="/help"className="s-sidebar__nav-link" > 
                                     <i className="fa fa-camera"></i><em>Help</em>
-                                </a>
+                                    </Link>
                             </li>
                         </ul>
                     </nav>
                 </div>
 
             
-                <main className="s-layout__content">
-                </main>
             </div>
         </>
     )
 }
 
-export default Dashboard;
+export default AssistantDashboard;

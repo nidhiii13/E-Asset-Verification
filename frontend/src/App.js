@@ -9,12 +9,16 @@ import {
 } from "react-router-dom";
 import Home from './Components/Home';
 import Navbar from './Components/Navbar/Navbar';
-import Verifierhome from './Components/Verifierhome';
+import AssistantDashboard from './Components/Dashboard/AssistantDashboard';
+import VerifierDashboard from './Components/Dashboard/VerifierDashboard';
+import Verifierhome from './Components/Verifier/Verifierhome'
+import Company from './Components/Company/Company';
+import Location from './Components/Location/Location';
+import Update from './Components/Update/Update';
+import Help from './Components/Help/Help';
+import Companystats from './Components/Companystats/Companystats';
 function App() {
-  const [isopen, setisopen] = useState(false)
-  const toggle = () => {
-    setisopen(!isopen)
-  }
+ 
 
   return (
     <>
@@ -26,8 +30,29 @@ function App() {
           <Route exact path="/home">
             <Home />
           </Route>
-          <Route exact path="/Verifierhome">
+          <Route exact path="/assistant">
+            <AssistantDashboard />
+          </Route>
+          <Route exact path="/verifier">
+            <VerifierDashboard />
+          </Route>
+          <Route exact path="/verifierhome">
             <Verifierhome />
+          </Route>
+          <Route exact path="/addcompany">
+            <Company />
+          </Route>
+          <Route exact path="/addlocation">
+            <Location />
+          </Route>
+          <Route exact path="/update">
+            <Update />
+          </Route>
+          <Route exact path="/help">
+            <Help />
+          </Route>
+          <Route exact path="/Companystats">
+            <Companystats />
           </Route>
           </Switch>
     </>

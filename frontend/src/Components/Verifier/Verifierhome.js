@@ -1,6 +1,6 @@
 import React from 'react'
-import VerifierDashboard from './Dashboard/VerifierDashboard'
-import Barcode from './Barcode/Barcode'
+import VerifierDashboard from '../Dashboard/VerifierDashboard'
+import Barcode from '../Barcode/Barcode'
 import "./Verifierhome.css"
 
 const Verifierhome = () => {

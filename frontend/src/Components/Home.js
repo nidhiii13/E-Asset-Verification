@@ -4,6 +4,7 @@ import './Home.css'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import xlsx from 'xlsx';
+import axios from 'axios';
 import AssistantDashboard from './Dashboard/AssistantDashboard';
 const Home = () => {
     useEffect(() => {
@@ -33,7 +34,19 @@ const Home = () => {
 	};
 
 	const handleSubmission = () => {
-        console.log(selectedFile);
+       // console.log(selectedFile);
+       axios.post("http://127.0.0.1:8000/asset/barcode",selectedFile,{headers: {
+        'Content-Type' : 'application/json' 
+   }})
+   .then((res) => {
+       console.log("RESPONSE RECEIVED: ", (res.data));
+       setSelectedFile("");
+     })
+     .catch((err) => {
+       console.log("AXIOS ERROR: ", err);
+       setSelectedFile("");
+
+     })
 	};
     return (
         <div>

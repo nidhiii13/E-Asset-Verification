@@ -1,9 +1,9 @@
 import React from 'react'
 import "./Dashboard.css"
+import { Link } from 'react-router-dom'
 const VerifierDashboard = () => {
     return (
         <>
-        
             <div className="s-layout">
 
                 <div className="s-layout__sidebar">
@@ -24,18 +24,14 @@ const VerifierDashboard = () => {
                                 </a>
                             </li>
                             <li>
-                                <a className="s-sidebar__nav-link" href="#0">
+                                <Link to="/verifierhome"className="s-sidebar__nav-link" > 
                                     <i className="fa fa-camera"></i><em>Asset Verification</em>
-                                </a>
+                                    </Link>
+                                
                             </li>
                             <li>
                                 <a className="s-sidebar__nav-link" href="#0">
                                     <i className="fa fa-camera"></i><em>Help</em>
-                                </a>
-                            </li>
-                            <li>
-                                <a className="s-sidebar__nav-link" href="#0">
-                                    <i className="fa fa-camera"></i><em>Logout</em>
                                 </a>
                             </li>
                         </ul>
@@ -43,9 +39,7 @@ const VerifierDashboard = () => {
                 </div>
 
             
-                <main className="s-layout__content">
-                   
-                </main>
+                
             </div>
         </>
     )
