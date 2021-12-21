@@ -1,45 +1,26 @@
 import React from 'react'
-import "./Dashboard.css"
+import "./Dashboard2.css";
+import $ from 'jquery';
 import { Link } from 'react-router-dom'
 const VerifierDashboard = () => {
+
     return (
         <>
-            <div className="s-layout">
-
-                <div className="s-layout__sidebar">
-                    <a className="s-sidebar__trigger" href="#0">
-                        <i className="fa fa-bars"></i>
-                    </a>
-
-                    <nav className="s-sidebar__nav">
+        <div className='verifierdashboard_container'>
+            <div className="sidebar">
+                <dropdown>
+                    <ul className='sidebar_nav'>
+                        <li className='list'>Scan Barcode</li>
+                        <input id="drop4" type="checkbox" />
+                        <label for="drop4" className="animate">Asset Verfication</label>
                         <ul>
-                            <li>
-                                <a className="s-sidebar__nav-link" href="#0">
-                                    <i className="fa fa-home"></i><em>Home</em>
-                                </a>
-                            </li>
-                            <li>
-                                <a className="s-sidebar__nav-link" href="#0">
-                                    <i className="fa fa-user"></i><em>Scan Barcode</em>
-                                </a>
-                            </li>
-                            <li>
-                                <Link to="/verifierhome"className="s-sidebar__nav-link" > 
-                                    <i className="fa fa-camera"></i><em>Asset Verification</em>
-                                    </Link>
-                                
-                            </li>
-                            <li>
-                                <a className="s-sidebar__nav-link" href="#0">
-                                    <i className="fa fa-camera"></i><em>Help</em>
-                                </a>
-                            </li>
+                            <li className='list'>Found Report</li>
+                            <li className='list'>Not Found Report</li>
                         </ul>
-                    </nav>
-                </div>
-
-            
-                
+                        <li className="drop">Help</li>
+                    </ul>
+                </dropdown>
+            </div>
             </div>
         </>
     )
