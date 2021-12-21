@@ -19,6 +19,7 @@ import Help from './Components/Help/Help';
 import Companystats from './Components/Companystats/Companystats';
 import Locationstats from './Components/Locationstats/Locationstats';
 import Servicestats from './Components/Servicestats/Servicestats';
+import Verifystats from './Components/Verifystats/Verifystats';
 function App() {
  
 
@@ -61,6 +62,9 @@ function App() {
           </Route>
           <Route exact path="/Servicestats">
             <Servicestats />
+          </Route>
+          <Route exact path="/Verifystats">
+            <Verifystats />
           </Route>
           </Switch>
     </>

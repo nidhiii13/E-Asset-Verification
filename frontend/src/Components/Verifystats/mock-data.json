@@ -1,0 +1,16 @@
+[
+    {
+        "asset_id": "RVCE04CP0001" ,
+        "asset_description": "PRINTER",
+        "capitalized_date":  "2004-08-12",
+        "company_id":"A001" ,
+        "room_no": "123A"
+    },
+    {
+    "asset_id": "RVCE04CP0002" ,
+    "asset_description": "PROJECTOR",
+    "capitalized_date":  "2020-12-24",
+    "company_id":"PP01" ,
+    "room_no": "126A"
+    }
+  ]

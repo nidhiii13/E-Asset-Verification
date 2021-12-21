@@ -1,23 +1,31 @@
-  import React, { useState, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import { nanoid } from "nanoid";
-import "./Companystats.css";
+import "./Verifystats.css";
 import data from "./mock-data.json";
 import EditableRow from "./EditableRow";
 import ReadOnlyRow from "./ReadOnlyRow";
+import { useEffect } from "react";
 
-const Companystats = () => {
+const Verifystats = () => {
   const [contacts, setContacts] = useState(data);
- 
 
   const [editFormData, setEditFormData] = useState({
-    fullName: "",
-    address: "",
-    phoneNumber: "",
-    email: "",
+    asset_id: "" ,
+    asset_description: "",
+    capitalized_date:  "",
+    company_id:"" ,
+    room_no: ""
   });
 
   const [editContactId, setEditContactId] = useState(null);
-
+  //useEffect(async() => {
+    //const res=await axios.get('http://127.0.0.1:8000/company/add');
+    //console.log(res.data);
+    //setContacts(res.data);
+    //setFlag(true);
+    //console.log(typeof(contacts))
+    
+  //}, [])
 
   const handleEditFormChange = (event) => {
     event.preventDefault();
@@ -34,32 +42,35 @@ const Companystats = () => {
     event.preventDefault();
 
     const editedContact = {
-      id: editContactId,
-      fullName: editFormData.fullName,
-      address: editFormData.address,
-      phoneNumber: editFormData.phoneNumber,
-      email: editFormData.email,
+      asset_id: editFormData.asset_id,
+      asset_description: editFormData.asset_description,
+      capitalized_date: editFormData.capitalized_date,
+     company_id: editFormData.company_id,
+      room_no: editFormData.room_no,
     };
 
     const newContacts = [...contacts];
 
-    const index = contacts.findIndex((contact) => contact.id === editContactId);
+    const index = contacts.findIndex((contact) => contact.asset_id === editFormData.asset_id);
 
     newContacts[index] = editedContact;
 
     setContacts(newContacts);
     setEditContactId(null);
+    //const req=await axios.put('http://127.0.0.1:8000/company/edit/'+pk,editedContact);
+    //console.log(req);
   };
 
   const handleEditClick = (event, contact) => {
     event.preventDefault();
-    setEditContactId(contact.id);
+    setEditContactId(contact.asset_id);
 
     const formValues = {
-      fullName: contact.fullName,
-      address: contact.address,
-      phoneNumber: contact.phoneNumber,
-      email: contact.email,
+      asset_id: contact.asset_id,
+      asset_description: contact.asset_description,
+      capitalized_date: contact.capitalized_date,
+      company_id: contact.company_id,
+      room_no: contact.room_no
     };
 
     setEditFormData(formValues);
@@ -72,32 +83,34 @@ const Companystats = () => {
   const handleDeleteClick = (contactId) => {
     const newContacts = [...contacts];
 
-    const index = contacts.findIndex((contact) => contact.id === contactId);
+    const index = contacts.findIndex((contact) => contact.asset_id === contactId);
 
     newContacts.splice(index, 1);
-
+   //const req= await axios.delete('http://127.0.0.1:8000/company/delete/'+contactId);
+     //console.log(req);
     setContacts(newContacts);
+    //console.log(typeof(contacts))
   };
 
   return (
     <div className="app-container">
-        <h1 className="stats_head">Company Stats</h1>
+        <h1 className="stats_head">Verification Report for found assets</h1>
       <form className="stats_form" onSubmit={handleEditFormSubmit}>
         <table className="stats_table">
           <thead>
             <tr>
+              <th>Asset id</th>
+              <th>Asset Description</th>
+              <th>Capitalized date</th>
               <th>Company ID</th>
-              <th>Company Name</th>
-              <th>Email</th>
               <th>Location</th>
-              <th>Contact No</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {contacts.map((contact) => (
               <Fragment>
-                {editContactId === contact.id ? (
+                {editFormData.asset_id === contact.asset_id ? (
                   <EditableRow
                     editFormData={editFormData}
                     handleEditFormChange={handleEditFormChange}
@@ -121,4 +134,4 @@ const Companystats = () => {
   );
 };
 
-export default Companystats;
+export default Verifystats;
