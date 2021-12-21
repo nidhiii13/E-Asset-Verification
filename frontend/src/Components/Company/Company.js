@@ -48,7 +48,7 @@ const Company = () => {
                 <h2 className='h2block_home'>Add company details</h2>
                 <button><Link to= "/companystats"> Company stats report</Link></button>
                 <div className='input_home'>
-                    <div className='textblock'><p>Comapny ID</p></div>
+                    <div className='textblock'><p>Company ID</p></div>
                     <div className='inputblock'>
                         <input type="text" name="file" className='input' value={cid} onChange={(e) => setCid(e.target.value)}/* onChange={changeHandler} */ />
                     </div>

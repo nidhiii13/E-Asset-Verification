@@ -1,37 +1,33 @@
 import React, { useState, Fragment } from "react";
 import { nanoid } from "nanoid";
-import "./Locationstats.css";
+import "./Servicestats.css";
 import EditableRow from "./EditableRow";
 import ReadOnlyRow from "./ReadOnlyRow";
-import axios from "axios";
 import { useEffect } from "react";
-import { stream } from "xlsx";
-const Locationstats = () => {
+import axios from "axios";
 
-  const [flag,setFlag]= useState(false);
+const Servicestats = () => {
   const [contacts, setContacts] = useState({});
-
+  const [flag,setFlag] = useState(false);
   const [editFormData, setEditFormData] = useState({
-    name: "",
-    room_no: "",
-    list_assets:"",
-    incharge: ""
+    status:"",
+    remarks:"",
+    service_count:"",
+    asset_id:""
   });
 
   const [editContactId, setEditContactId] = useState(null);
-
   useEffect(async() => {
-    const res=await axios.get('http://127.0.0.1:8000/location/getloc');
-    console.log(res.data);
-    const data= res.data;
+    const res=await axios.get('http://127.0.0.1:8000/service/getservice');
+    const data = res.data;
     data.map((obj)=>{
-        var value =obj.incharge.SSN
-        obj.incharge= value
+        var value =obj.asset_id.asset_id
+        obj.asset_id = value
     })
-    console.log(res.data)
+    console.log(res.data);
     setContacts(res.data);
     setFlag(true);
-    console.log((contacts))
+    console.log(typeof(contacts))
     
   }, [])
 
@@ -46,38 +42,38 @@ const Locationstats = () => {
 
     setEditFormData(newFormData);
   };
-  const handleEditFormSubmit = async (event) => {
+  const handleEditFormSubmit = async(event) => {
     event.preventDefault();
 
     const editedContact = {
-        name: editFormData.name,
-        room_no: editFormData.room_no,
-        list_assets: editFormData.list_assets,
-        incharge: editFormData.incharge
-     
+      id: editContactId,
+      status: editFormData.status,
+      remarks: editFormData.remarks,
+      service_count: editFormData.service_count,
+      asset_id: editFormData.asset_id,
     };
 
     const newContacts = [...contacts];
 
-    const index = contacts.findIndex((contact) => contact.room_no === editFormData.room_no);
+    const index = contacts.findIndex((contact) => contact.asset_id === editContactId);
+
     newContacts[index] = editedContact;
-     console.log(newContacts[index].room_no);
-     const pk =newContacts[index].room_no
+    const pk =newContacts[index].asset_id
     setContacts(newContacts);
     setEditContactId(null);
-    const req=await axios.put('http://127.0.0.1:8000/location/editloc/'+pk,editedContact);
+    const req=await axios.put('http://127.0.0.1:8000/service/editservice/'+pk,editedContact);
     console.log(req);
   };
 
   const handleEditClick = (event, contact) => {
     event.preventDefault();
-    setEditContactId(contact.room_no);
+    setEditContactId(contact.asset_id);
 
     const formValues = {
-        name: contact.name,
-        room_no: contact.room_no,
-        list_assets: contact.list_assets,
-        incharge: contact.incharge
+      status: contact.status,
+      remarks: contact.remarks,
+      service_count: contact.service_count,
+      asset_id: contact.asset_id,
     };
 
     setEditFormData(formValues);
@@ -90,33 +86,33 @@ const Locationstats = () => {
   const handleDeleteClick = async(contactId) => {
     const newContacts = [...contacts];
 
-    const index = contacts.findIndex((contact) => contact.room_no === contactId);
+    const index = contacts.findIndex((contact) => contact.asset_id === contactId);
 
     newContacts.splice(index, 1);
-     const req= await axios.delete('http://127.0.0.1:8000/location/deleteloc/'+contactId);
-     console.log(req);
+   const req= await axios.delete('http://127.0.0.1:8000/service/deleteservice/'+contactId);
+     //console.log(req);
     setContacts(newContacts);
-    console.log(typeof(contacts))
+    //console.log(typeof(contacts))
   };
 
   return (
     <div className="app-container">
-        <h1 className="stats_head">Location Stats</h1>
+        <h1 className="stats_head">Service Stats</h1>
       <form className="stats_form" onSubmit={handleEditFormSubmit}>
-        <table>
+        <table className="stats_table">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Room No</th>
-              <th>Asset List</th>
-              <th>Incharge</th>
+              <th>Status</th>
+              <th>Remarks</th>
+              <th>Service Count</th>
+              <th>Asset ID</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {flag && contacts.map((contact) => (
               <Fragment>
-                {editContactId === contact.room_no ? (
+                {editContactId === contact.asset_id ? (
                   <EditableRow
                     editFormData={editFormData}
                     handleEditFormChange={handleEditFormChange}
@@ -130,7 +126,7 @@ const Locationstats = () => {
                   />
                 )}
               </Fragment>
-            ))}  
+            ))}
           </tbody>
         </table>
       </form>
@@ -140,4 +136,4 @@ const Locationstats = () => {
   );
 };
 
-export default Locationstats;
+export default Servicestats;

@@ -88,7 +88,28 @@ def asset_company_loc(request):
 
 @csrf_exempt
 @api_view(["GET"])
-def verification_process(request):
+def verification_process_found(request):
     query = Asset.objects.filter(found_status=True)
     serializer=AssetSerializer(instance=query,many=True)
+    list = serializer.data
+    for data in list:
+        room = Location.objects.get(id=data['room_no'])
+        data['room_no'] = room.room_no
+        company = Company.objects.get(id=data['company_id'])
+        data['company_id'] = company.company_id
+
+    return Response(serializer.data)
+
+@csrf_exempt
+@api_view(["GET"])
+def verification_process_notfound(request):
+    query = Asset.objects.filter(found_status=False)
+    serializer=AssetSerializer(instance=query,many=True)
+    list = serializer.data
+    for data in list:
+        room = Location.objects.get(id=data['room_no'])
+        data['room_no'] = room.room_no
+        company = Company.objects.get(id=data['company_id'])
+        data['company_id'] = company.company_id
+
     return Response(serializer.data)

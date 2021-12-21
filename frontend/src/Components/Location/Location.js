@@ -3,6 +3,7 @@ import './Location.css';
 import { useState } from 'react';
 import axios from 'axios';
 import AssistantDashboard from '../Dashboard/AssistantDashboard';
+import { Link } from 'react-router-dom';
 const Location = () => {
     const [name,setName]=useState("");
     const [room,setRoom]=useState("");
@@ -38,7 +39,8 @@ const Location = () => {
    <AssistantDashboard />
    <div className='assistantblock'>
             
-            <h2 className='h2block_home'>Add Location details</h2>          
+            <h2 className='h2block_home'>Add Location details</h2>    
+            <button ><Link to= "/locationstats"> Location stats report</Link></button>      
             <div className='input_home'>
              <div className='textblock'><p>Location Name</p></div>   
             <div className='inputblock'> 

@@ -1,7 +1,7 @@
 .assistantblock{
 
   left: 450px;
-  top: 200px;
+  top: 25%;
    position: absolute;
    font-size: 18px;
 }
@@ -18,7 +18,7 @@
  }
  .submit_home{
   position: relative;
-  top: 100px;
+  top: 45%;
   left: 45%;
 
  }
@@ -65,3 +65,4 @@ color: black;
 background-color: #F0F8FF;
 border:  solid #243e56;
 }
+

@@ -3,7 +3,7 @@
   left: 400px;
   top: 200px;
    position: absolute;
-   font-size: 18px;
+   font-size: 10px;
 }
 
  .h1block_home{
@@ -13,6 +13,7 @@
  .h2block_home{
    position: relative;
    left: 20%;
+   top:40%;
    color: midnightblue;
 
  }

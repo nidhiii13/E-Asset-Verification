@@ -19,6 +19,7 @@ import { Redirect } from 'react-router-dom';
 import Companystats from './Components/CompanyStats/Companystats';
 import Locationstats from './Components/LocationStats/Locationstats';
 import Update from './Components/UpdateAsset/Update';
+import Servicestats from './Components/ServiceStats/Servicestats';
 function App() {
      const info = useSelector((state) => state.User.info);
   return (
@@ -46,6 +47,9 @@ function App() {
           </Route>
           <Route exact path="/locationstats">
             <Locationstats />
+          </Route>
+          <Route exact path="/servicestats">
+            <Servicestats />
           </Route>
           <Route exact path="/addlocation">
             <Location />
