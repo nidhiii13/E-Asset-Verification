@@ -6,6 +6,7 @@ import ReadOnlyRow from "./ReadOnlyRow";
 import axios from "axios";
 import { useEffect } from "react";
 import { stream } from "xlsx";
+import { useSelector } from "react-redux";
 const Companystats = () => {
 
   const [flag,setFlag]= useState(false);
@@ -16,11 +17,12 @@ const Companystats = () => {
     company_name: "",
     location: "",
     email_id: "",
-    enquiry_no:""
+    enquiry_no:"",
+    list:""
   });
 
   const [editContactId, setEditContactId] = useState(null);
-
+  const info = useSelector((state) => state.User.info);
   useEffect(async() => {
     const res=await axios.get('http://127.0.0.1:8000/company/add');
     console.log(res.data);
@@ -49,7 +51,8 @@ const Companystats = () => {
         company_name: editFormData.company_name,
         location: editFormData.location,
         email_id: editFormData.email_id,
-        enquiry_no:editFormData.enquiry_no
+        enquiry_no:editFormData.enquiry_no,
+        list:editFormData.list
      
     };
 
@@ -59,9 +62,13 @@ const Companystats = () => {
     newContacts[index] = editedContact;
      console.log(newContacts[index].company_id);
      const pk =newContacts[index].company_id
-    setContacts(newContacts);
+  
     setEditContactId(null);
-    const req=await axios.put('http://127.0.0.1:8000/company/edit/'+pk,editedContact);
+    const req=await axios.put('http://127.0.0.1:8000/company/edit/'+pk,editedContact,{headers: {
+        "Authorization" : `Token ${info.token}`
+    }});
+    if (req.status==200)
+    setContacts(newContacts);
     console.log(req);
   };
 
@@ -74,7 +81,8 @@ const Companystats = () => {
         company_name: contact.company_name,
         location: contact.location,
         email_id: contact.email_id,
-        enquiry_no:contact.enquiry_no
+        enquiry_no:contact.enquiry_no,
+        list:contact.list
     };
 
     setEditFormData(formValues);
@@ -90,7 +98,9 @@ const Companystats = () => {
     const index = contacts.findIndex((contact) => contact.company_id === contactId);
 
     newContacts.splice(index, 1);
-     const req= await axios.delete('http://127.0.0.1:8000/company/delete/'+contactId);
+     const req= await axios.delete('http://127.0.0.1:8000/company/delete/'+contactId,{headers: {
+        "Authorization" : `Token ${info.token}`
+    }});
      console.log(req);
     setContacts(newContacts);
     console.log(typeof(contacts))
@@ -108,6 +118,7 @@ const Companystats = () => {
               <th>Location</th>
               <th>Email</th>
               <th>Enquiry No</th>
+              <th>Contributions</th>
               <th>Actions</th>
             </tr>
           </thead>

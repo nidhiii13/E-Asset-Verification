@@ -5,6 +5,7 @@ import { useState } from 'react';
 import xlsx from 'xlsx';
 import axios from 'axios';
 import AssistantDashboard from './Dashboard/AssistantDashboard';
+import { useSelector } from 'react-redux';
 const Home = () => {
     useEffect(() => {
         const token=localStorage.getItem('token');
@@ -12,7 +13,7 @@ const Home = () => {
     }, [])
     const [selectedFile, setSelectedFile] = useState({});
 	const [isFilePicked, setIsFilePicked] = useState(false);
-
+    const info = useSelector((state) => state.User.info);
 	const changeHandler = (e) => {
 		e.preventDefault();
     if (e.target.files) {
@@ -34,7 +35,8 @@ const Home = () => {
 
 	const handleSubmission = () => {
         axios.post("http://127.0.0.1:8000/asset/barcode",selectedFile,{headers: {
-         'Content-Type' : 'application/json' 
+         'Content-Type' : 'application/json' ,
+         "Authorization" : `Token ${info.token}`
     }})
     .then((res) => {
         console.log("RESPONSE RECEIVED: ", (res.data));

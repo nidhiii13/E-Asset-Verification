@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from rest_framework.decorators import api_view,permission_classes
+from rest_framework.decorators import api_view,permission_classes,authentication_classes
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.serializers import Serializer
 from .serializers import LocationSerializer
@@ -16,6 +17,8 @@ from rest_framework.status import (
 # Create your views here.
 @csrf_exempt
 @api_view(["POST"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def add_location(request):
     req=request.data
     print(req['name'])
@@ -31,6 +34,8 @@ def add_location(request):
 
 @csrf_exempt
 @api_view(["PUT"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def edit_location(request,pk):
     query = Location.objects.get(room_no=pk)
     try:
@@ -49,6 +54,8 @@ def edit_location(request,pk):
 
 @csrf_exempt
 @api_view(["GET"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def get_location(request):
     query = Location.objects.all()
     serializer=LocationSerializer(query,many=True)
@@ -56,6 +63,8 @@ def get_location(request):
     
 @csrf_exempt
 @api_view(["DELETE"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def delete_location(request,pk):
     query = Location.objects.get(room_no=pk)
     if query:

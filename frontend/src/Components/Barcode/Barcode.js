@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import Quagga from 'quagga';
 import "./Barcode.css";
 import axios from 'axios';
-
+import {useSelector} from 'react-redux';
 const Barcode = (props) => {
 
   const firstUpdate = useRef(true);
   const [isStart, setIsStart] = useState(false);
   const [barcode, setBarcode] = useState('');
+
+  const info = useSelector((state) => state.User.info);
 
   useEffect(() => {
     return () => {
@@ -36,7 +38,8 @@ const Barcode = (props) => {
     }
     setBarcode("");
     axios.post("http://127.0.0.1:8000/asset/updatestatus",data,{headers: {
-         'Content-Type' : 'application/json' 
+         'Content-Type' : 'application/json' ,
+         "Authorization" : `Token ${info.token}`
     }})
     .then((res) => {
         console.log("RESPONSE RECEIVED: ", (res.data));

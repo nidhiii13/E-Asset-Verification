@@ -9,7 +9,7 @@ const initState = {
     }
 };
 
-//token, userid, isLoggedIn
+
 export const loginUser = (data) => {
     return {
         type: LOGIN_USER,

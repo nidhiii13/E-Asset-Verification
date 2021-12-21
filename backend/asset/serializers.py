@@ -7,7 +7,7 @@ class AssetSerializer(ModelSerializer):
     capitalized_date=serializers.DateField()
     class Meta:
         model=Asset
-        fields=('asset_id','capitalized_date','asset_description','room_no','company_id')
+        fields=('asset_id','capitalized_date','asset_description','room_no','company_id','found_status')
 
 class SAP_AssetSerializer(ModelSerializer):
     capitalized_date=serializers.DateField()

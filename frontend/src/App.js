@@ -20,6 +20,7 @@ import Companystats from './Components/CompanyStats/Companystats';
 import Locationstats from './Components/LocationStats/Locationstats';
 import Update from './Components/UpdateAsset/Update';
 import Servicestats from './Components/ServiceStats/Servicestats';
+import Verifystats from './Components/VerificationStats/Verifystats';
 function App() {
      const info = useSelector((state) => state.User.info);
   return (
@@ -61,6 +62,12 @@ function App() {
           </Route>
           <Route exact path="/verifierhome">
             <Verifierhome />
+          </Route>
+          <Route exact path="/verifystats/found">
+            <Verifystats status={true} />
+          </Route>
+          <Route exact path="/verifystats/notfound">
+            <Verifystats status={false} />
           </Route></>):
               (
                 <Redirect to="/"/>

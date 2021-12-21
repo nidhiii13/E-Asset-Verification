@@ -1,42 +1,43 @@
 import React, { useState, Fragment } from "react";
 import { nanoid } from "nanoid";
-import "./Locationstats.css";
+import "./Verifystats.css";
 import EditableRow from "./EditableRow";
 import ReadOnlyRow from "./ReadOnlyRow";
-import axios from "axios";
 import { useEffect } from "react";
-import { stream } from "xlsx";
+import axios from "axios";
 import { useSelector } from "react-redux";
-const Locationstats = () => {
 
-  const [flag,setFlag]= useState(false);
+const Verifystats = (props) => {
   const [contacts, setContacts] = useState({});
-
+  const [flag,setFlag] = useState(false);
   const [editFormData, setEditFormData] = useState({
-    name: "",
+    asset_id: "" ,
+    asset_description: "",
+    capitalized_date:  "",
+    company_id:"" ,
     room_no: "",
-    list_assets:"",
-    incharge: ""
+    found_status:""
   });
 
+
+    const info = useSelector((state) => state.User.info);
+
   const [editContactId, setEditContactId] = useState(null);
-  const info = useSelector((state) => state.User.info);
   useEffect(async() => {
-    const res=await axios.get('http://127.0.0.1:8000/location/getloc',{headers: {
+      if(props.status==true)
+    var res=await axios.get('http://127.0.0.1:8000/asset/verification/found',{headers: {
+        "Authorization" : `Token ${info.token}`
+    }});
+    else
+    var res=await axios.get('http://127.0.0.1:8000/asset/verification/notfound',{headers: {
         "Authorization" : `Token ${info.token}`
     }});
     console.log(res.data);
-    const data= res.data;
-    data.map((obj)=>{
-        var value =obj.incharge.SSN
-        obj.incharge= value
-    })
-    console.log(res.data)
     setContacts(res.data);
     setFlag(true);
-    console.log((contacts))
+    console.log(typeof(contacts))
     
-  }, [])
+}, [])
 
   const handleEditFormChange = (event) => {
     event.preventDefault();
@@ -49,26 +50,27 @@ const Locationstats = () => {
 
     setEditFormData(newFormData);
   };
-  const handleEditFormSubmit = async (event) => {
+  const handleEditFormSubmit = async(event) => {
     event.preventDefault();
 
     const editedContact = {
-        name: editFormData.name,
-        room_no: editFormData.room_no,
-        list_assets: editFormData.list_assets,
-        incharge: editFormData.incharge
-     
+      asset_id: editFormData.asset_id,
+      asset_description: editFormData.asset_description,
+      capitalized_date: editFormData.capitalized_date,
+     company_id: editFormData.company_id,
+      room_no: editFormData.room_no,
+      found_status: editFormData.found_status
     };
 
     const newContacts = [...contacts];
 
-    const index = contacts.findIndex((contact) => contact.room_no === editFormData.room_no);
+    const index = contacts.findIndex((contact) => contact.asset_id === editFormData.asset_id);
+
     newContacts[index] = editedContact;
-     console.log(newContacts[index].room_no);
-     const pk =newContacts[index].room_no
- 
+    const pk = newContacts[index].asset_id
+   
     setEditContactId(null);
-    const req=await axios.put('http://127.0.0.1:8000/location/editloc/'+pk,editedContact,{headers: {
+    const req=await axios.put('http://127.0.0.1:8000/asset/report/edit/'+pk,editedContact,{headers: {
         "Authorization" : `Token ${info.token}`
     }});
     if (req.status==200)
@@ -78,13 +80,15 @@ const Locationstats = () => {
 
   const handleEditClick = (event, contact) => {
     event.preventDefault();
-    setEditContactId(contact.room_no);
+    setEditContactId(contact.asset_id);
 
     const formValues = {
-        name: contact.name,
-        room_no: contact.room_no,
-        list_assets: contact.list_assets,
-        incharge: contact.incharge
+      asset_id: contact.asset_id,
+      asset_description: contact.asset_description,
+      capitalized_date: contact.capitalized_date,
+      company_id: contact.company_id,
+      room_no: contact.room_no,
+      found_status: contact.found_status
     };
 
     setEditFormData(formValues);
@@ -94,38 +98,27 @@ const Locationstats = () => {
     setEditContactId(null);
   };
 
-  const handleDeleteClick = async(contactId) => {
-    const newContacts = [...contacts];
-
-    const index = contacts.findIndex((contact) => contact.room_no === contactId);
-
-    newContacts.splice(index, 1);
-     const req= await axios.delete('http://127.0.0.1:8000/location/deleteloc/'+contactId,{headers: {
-        "Authorization" : `Token ${info.token}`
-    }});
-     console.log(req);
-    setContacts(newContacts);
-    console.log(typeof(contacts))
-  };
 
   return (
     <div className="app-container">
-        <h1 className="stats_head">Location Stats</h1>
+        <h1 className="stats_head">Verification Report for found assets</h1>
       <form className="stats_form" onSubmit={handleEditFormSubmit}>
-        <table>
+        <table className="stats_table">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Room No</th>
-              <th>Asset List</th>
-              <th>Incharge</th>
+              <th>Asset id</th>
+              <th>Asset Description</th>
+              <th>Capitalized date</th>
+              <th>Company ID</th>
+              <th>Location</th>
+              <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {flag && contacts.map((contact) => (
               <Fragment>
-                {editContactId === contact.room_no ? (
+                {editContactId === contact.asset_id ? (
                   <EditableRow
                     editFormData={editFormData}
                     handleEditFormChange={handleEditFormChange}
@@ -135,11 +128,10 @@ const Locationstats = () => {
                   <ReadOnlyRow
                     contact={contact}
                     handleEditClick={handleEditClick}
-                    handleDeleteClick={handleDeleteClick}
                   />
                 )}
               </Fragment>
-            ))}  
+            ))}
           </tbody>
         </table>
       </form>
@@ -149,4 +141,4 @@ const Locationstats = () => {
   );
 };
 
-export default Locationstats;
+export default Verifystats;

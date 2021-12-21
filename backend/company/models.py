@@ -7,6 +7,7 @@ class Company(models.Model):
     location=models.TextField()
     email_id=models.EmailField()
     enquiry_no=models.CharField(max_length=10)
+    list =models.IntegerField(default=None)
 
     class Meta:
         db_table='company'

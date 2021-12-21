@@ -4,11 +4,13 @@ import { useState } from 'react';
 import axios from 'axios';
 import AssistantDashboard from '../Dashboard/AssistantDashboard';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const Location = () => {
     const [name,setName]=useState("");
     const [room,setRoom]=useState("");
     const [list,setList]=useState(null);
     const [incharge,setIncharge]=useState("");
+    const info = useSelector((state) => state.User.info);
     const handleSubmit=(e)=>{
         e.preventDefault();
         var data={
@@ -23,7 +25,8 @@ const Location = () => {
         setIncharge("");
 
         axios.post("http://127.0.0.1:8000/location/addloc",data,{headers: {
-         'Content-Type' : 'application/json' 
+         'Content-Type' : 'application/json' ,
+         "Authorization" : `Token ${info.token}`
     }})
     .then((res) => {
         console.log("RESPONSE RECEIVED: ", (res.data));

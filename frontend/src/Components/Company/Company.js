@@ -18,14 +18,15 @@ const Company = () => {
         "company_name": cname,
         "location": cloc,
         "email_id": cmail,
-        "enquiry_no": cph
+        "enquiry_no": cph,
+        "list":0
         }
         setCid("");
         setCname("");
         setCmail("");
         setCloc("");
         setCph("");
-
+      
         axios.post("http://127.0.0.1:8000/company/add/",data,{headers: {
          'Content-Type' : 'application/json' 
     }})

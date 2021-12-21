@@ -1,8 +1,9 @@
 import re
 from django.shortcuts import render
 from django.shortcuts import render
-from rest_framework.decorators import api_view,permission_classes
+from rest_framework.decorators import api_view,permission_classes,authentication_classes
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from asset.models import Asset
 from .serializers import ServiceSerializer
@@ -17,7 +18,8 @@ from rest_framework import serializers
 # Create your views here.
 @csrf_exempt
 @api_view(["POST"])
-@permission_classes((IsAuthenticated,))
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def add_service(request):
     try:
         asset_id=Asset.objects.get(asset_id=request.data.get('asset_id'))
@@ -33,6 +35,8 @@ def add_service(request):
 
 @csrf_exempt
 @api_view(["GET"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def get_service(request):
     service=Service.objects.all()
     serializer=ServiceSerializer(service,many=True)
@@ -41,6 +45,8 @@ def get_service(request):
 
 @csrf_exempt
 @api_view(["PUT"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def edit_service(request,pk):
     query=Asset.objects.get(asset_id=pk)
     try:
@@ -59,6 +65,8 @@ def edit_service(request,pk):
 
 @csrf_exempt
 @api_view(["DELETE"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def delete_service(request,pk):
     asset = Asset.objects.get(asset_id=pk)
     query = Service.objects.get(asset_id=asset.id)

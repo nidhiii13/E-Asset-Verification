@@ -5,5 +5,5 @@ from .models import Service
 class ServiceSerializer(ModelSerializer):
     class Meta:
         model=Service
-        depth=2
+        depth=1
         fields='__all__'
