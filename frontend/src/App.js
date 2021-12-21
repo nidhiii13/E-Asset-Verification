@@ -17,7 +17,8 @@ import Location from './Components/Location/Location';
 import Update from './Components/Update/Update';
 import Help from './Components/Help/Help';
 import Companystats from './Components/Companystats/Companystats';
-import Locationstats from './Components/Locationstats/Locationstats'
+import Locationstats from './Components/Locationstats/Locationstats';
+import Servicestats from './Components/Servicestats/Servicestats';
 function App() {
  
 
@@ -57,6 +58,9 @@ function App() {
           </Route>
           <Route exact path="/Locationstats">
             <Locationstats />
+          </Route>
+          <Route exact path="/Servicestats">
+            <Servicestats />
           </Route>
           </Switch>
     </>
