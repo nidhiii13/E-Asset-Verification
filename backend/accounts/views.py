@@ -24,6 +24,7 @@ from rest_framework.serializers import Serializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
+from django.core.mail import send_mail
 # Create your views here.
 def hello(request):
     return HttpResponse("hii")
@@ -50,3 +51,13 @@ def login(request):
     elif user.is_assistant and type=='assistant':
         return Response({'token': token.key,"type":type},
                     status=HTTP_200_OK)
+
+@csrf_exempt
+@api_view(["POST"])
+def contact_us(request):
+    name = request.data.get('name')
+    email_id = request.data.get('email_id')
+    phone = request.data.get('contact_no')
+    message = request.data.get('query') +'\n\nPhone no : '+phone+ '\nEmail id : '+email_id
+    send_mail('Query from '+name, 'Query : '+message, 'testnode13@gmail.com', ['nidhihh.is19@rvce.edu.in'], fail_silently=False)
+    return Response({'msg':'success'})

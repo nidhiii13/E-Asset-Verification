@@ -49,7 +49,7 @@ def edit_location(request,pk):
     if serializer.is_valid():
         serializer.save()
     else:
-        return Response({'msg':'fail'})
+        return Response(serializers.errors, status=HTTP_400_BAD_REQUEST)
     return Response(serializer.data)
 
 @csrf_exempt

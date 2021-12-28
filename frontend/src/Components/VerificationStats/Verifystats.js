@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 const Verifystats = (props) => {
   const [contacts, setContacts] = useState({});
   const [flag,setFlag] = useState(false);
+  const [found,setFound]=useState("");
   const [editFormData, setEditFormData] = useState({
     asset_id: "" ,
     asset_description: "",
@@ -21,17 +22,19 @@ const Verifystats = (props) => {
 
 
     const info = useSelector((state) => state.User.info);
-
+ 
   const [editContactId, setEditContactId] = useState(null);
   useEffect(async() => {
       if(props.status==true)
-    var res=await axios.get('http://127.0.0.1:8000/asset/verification/found',{headers: {
+    {var res=await axios.get('http://127.0.0.1:8000/asset/verification/found',{headers: {
         "Authorization" : `Token ${info.token}`
     }});
+   setFound("found");}
     else
-    var res=await axios.get('http://127.0.0.1:8000/asset/verification/notfound',{headers: {
+   { var res=await axios.get('http://127.0.0.1:8000/asset/verification/notfound',{headers: {
         "Authorization" : `Token ${info.token}`
     }});
+    setFound("Not found");}
     console.log(res.data);
     setContacts(res.data);
     setFlag(true);
@@ -101,7 +104,7 @@ const Verifystats = (props) => {
 
   return (
     <div className="app-container">
-        <h1 className="stats_head">Verification Report for found assets</h1>
+        <h1 className="stats_head">Verification Report for {found} assets</h1>
       <form className="stats_form" onSubmit={handleEditFormSubmit}>
         <table className="stats_table">
           <thead>

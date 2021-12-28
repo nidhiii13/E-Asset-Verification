@@ -12,7 +12,7 @@ const Home = () => {
         console.log(token);
     }, [])
     const [selectedFile, setSelectedFile] = useState({});
-	const [isFilePicked, setIsFilePicked] = useState(false);
+    const [msg,setMsg]=useState("");
     const info = useSelector((state) => state.User.info);
 	const changeHandler = (e) => {
 		e.preventDefault();
@@ -41,21 +41,21 @@ const Home = () => {
     .then((res) => {
         console.log("RESPONSE RECEIVED: ", (res.data));
         setSelectedFile("");
+        setMsg("Success!");
       })
       .catch((err) => {
         console.log("AXIOS ERROR: ", err);
         setSelectedFile("");
-
-      })
-	};
+        setMsg("Fail!");
+    })};
     return (
         <div>
             
             <AssistantDashboard />
-            
+            <div className='imgclass'><img src="Assitant.jpg" alt="" /></div>
             <div className='assistantblock1'>
-            
-            <h2 className='h2block_home1'>Upload the excel file</h2>          
+            <h2 className='h2block_home1'>Upload the excel file</h2>    
+            { <h4 className='error'>{msg}</h4>}         
             <div className='input_home1'><input type="file" name="file" onChange={changeHandler} /></div>
 			<div className='submit_home1'>
 				<button className='button_home1' onClick={handleSubmission}>Submit</button>

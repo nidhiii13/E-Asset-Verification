@@ -21,6 +21,7 @@ import Locationstats from './Components/LocationStats/Locationstats';
 import Update from './Components/UpdateAsset/Update';
 import Servicestats from './Components/ServiceStats/Servicestats';
 import Verifystats from './Components/VerificationStats/Verifystats';
+import ContactUs from './Components/ContactUs/ContactUs';
 function App() {
      const info = useSelector((state) => state.User.info);
   return (
@@ -29,6 +30,9 @@ function App() {
      <Switch>
           <Route exact path="/">
             <Login />
+          </Route>
+          <Route exact path="/contact">
+            <ContactUs />
           </Route>
           {info.isLoggedIn && info.userType =='assistant'?
               (<><Route exact path="/assistant">

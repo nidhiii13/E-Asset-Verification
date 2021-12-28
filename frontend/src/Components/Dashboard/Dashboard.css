@@ -179,4 +179,9 @@ transform: translate(-50%, -50%);
 
 .logout{
    background-color: var(--florida-waters);
+   margin-top: 10px;
+   border-radius: 10%;
+   border:2px solid floralwhite;
+   font-weight: bold;
+   font-size: 1.2rem;
 }

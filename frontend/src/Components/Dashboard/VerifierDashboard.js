@@ -1,16 +1,20 @@
 import React from 'react'
-import "./Dashboard.css"
+import './Dashboard2.css'
+import $ from 'jquery';
 import { Link } from 'react-router-dom'
-import { useHistory } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { logoutUser } from '../../Redux/User'
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../Redux/User';
 const VerifierDashboard = () => {
+    const user = useSelector(state => state.User.info);
     const history = useHistory();
     const dispatch = useDispatch();
     const handleSubmit = () =>{
         const info={
             isloggedIn: false
         }
+        console.log(user.type);
         localStorage.clear();
         dispatch(logoutUser(info));
 
@@ -19,43 +23,26 @@ const VerifierDashboard = () => {
     }
     return (
         <>
-            <div className="s-layout">
-
-                <div className="s-layout__sidebar">
-                    <a className="s-sidebar__trigger" href="#0">
-                        <i className="fa fa-bars"></i>
-                    </a>
-
-                    <nav className="s-sidebar__nav">
-                        <ul>
-                            <li>
-                            <Link to="/verifierhome"className="s-sidebar__nav-link" > 
-                                    <i className="fa fa-camera"></i><em>Scan Barcode</em>
-                                    </Link>
+            <nav className='nav_container'>
+                <ul>
+                    <li><Link to='/verifierhome' title="Nach Hause" className='list_value1'>Scan Barcode</Link></li>
+                    <li className="sub">
+                        <input type="checkbox" />
+                        <a href="#" className='list_value'>Asset Verification</a>
+                        <ul className="submenu">
+                            <li className="sub">
+                               {/*  <input type="checkbox" /> */}
+                               <> <Link to='/verifystats/found' className='list_value'>Found Report</Link></>
                             </li>
-                            <li>
-                                <Link to="/verifierhome"className="s-sidebar__nav-link" > 
-                                    <i className="fa fa-camera"></i><em>Asset Verification</em>
-                                    </Link>
-                                
-                            </li>
-                            <li>
-                                <a className="s-sidebar__nav-link" href="#0">
-                                    <i className="fa fa-camera"></i><em>Help</em>
-                                </a>
-                            </li>
-                            <li>
-                                <a className="s-sidebar__nav-link" href="#0">
-                                <i className="fa fa-camera"></i><em> <button className='logout' onClick={handleSubmit} >Logout </button></em>
-                                </a>
+                            <li className="sub">
+                               {/*  <input type="checkbox" /> */}
+                             <><Link to='/verifystats/notfound' className='list_value' >Not found report</Link></>
                             </li>
                         </ul>
-                    </nav>
-                </div>
-
-            
-                
-            </div>
+                    </li>
+                    <li><button className='logout' onClick={handleSubmit} >Logout </button> </li>
+                </ul>
+            </nav>
         </>
     )
 }

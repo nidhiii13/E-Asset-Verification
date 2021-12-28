@@ -1,6 +1,9 @@
 #scanner-container {
     position: relative;
   }
+  body,html{
+    background-color: white;
+  }
 
   .drawingBuffer {
     position: absolute;
@@ -25,4 +28,16 @@
       top: 10px;
       padding-top: 20px;
       padding-bottom: 10px;
+     
+      color: var(--midnight-blue);
+      font-weight: bold;
+  }
+
+  .button_update{
+    position: absolute;
+    top:3.5rem;
+    background-color: rgba(157, 172, 214, 0.151);
+    color: var(--midnight-blue);
+    font-weight: bold;
+    
   }

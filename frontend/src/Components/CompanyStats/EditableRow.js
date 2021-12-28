@@ -42,7 +42,7 @@ const EditableRow = ({
           type="email"
           required="required"
           placeholder=" email"
-          name="email"
+          name="email_id"
           value={editFormData.email_id}
           onChange={handleEditFormChange}
         ></input>

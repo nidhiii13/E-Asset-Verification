@@ -24,14 +24,14 @@ def add_service(request):
     try:
         asset_id=Asset.objects.get(asset_id=request.data.get('asset_id'))
     except:
-        return Response({'errotttr': "lol"})
+        return Response(serializers.errors, status=HTTP_400_BAD_REQUEST)
 
     request.data['asset_id']=asset_id.id
     serializer=ServiceSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
-    return Response({'error':'invalid'})
+    return Response(serializers.errors, status=HTTP_400_BAD_REQUEST)
 
 @csrf_exempt
 @api_view(["GET"])
@@ -60,7 +60,7 @@ def edit_service(request,pk):
     if serializer.is_valid():
         serializer.save()
     else:
-        return Response({'msg':'fail'})
+        return Response(serializers.errors, status=HTTP_400_BAD_REQUEST)
     return Response({'msg':'success'})
 
 @csrf_exempt

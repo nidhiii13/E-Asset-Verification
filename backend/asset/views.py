@@ -50,12 +50,13 @@ def barcode_generate(request):
             serializer.save()
             #return Response({'msg1':'success'})
         else:
-            return Response({'msg1':'fail'})
+            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
         name=i['asset_id']
         barcode=Barcode.objects.create(asset_id=name,barcode_id=str(code))
         code.save(r'C:\\Users\\nidhi\\Downloads\\barcode'+name)
+        return Response({'msg2':'success'})
 
-    return Response({'msg2':'success'})
+    return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
         
 
 @csrf_exempt
@@ -65,9 +66,11 @@ def barcode_generate(request):
 def found_status_update(request):
     barcode_no=request.data.get('barcode_id')
     query=Asset.objects.get(barcode_id=barcode_no)
-    query.found_status=True
-    query.save()
-
+    if query:
+        query.found_status=True
+        query.save()
+    else:
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
     return Response({'msg':'success'})
 
 @csrf_exempt
@@ -96,7 +99,7 @@ def asset_company_loc(request):
         return Response({'msg':'success'})
 
     except:
-        return Response({'msg':'failure'}) 
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @csrf_exempt
@@ -150,5 +153,5 @@ def edit_report(request,pk):
     if serializer.is_valid():
         serializer.save()
     else:
-        return Response({'msg':'fail'})
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
     return Response(serializer.data)

@@ -153,7 +153,7 @@ const Barcode = (props) => {
     <h3 className='h3_barcode_block'>Barcode Scanner</h3>
     <span className='code_block'>Barcode: {barcode}</span>
     <div className='button_barcode_block'><button onClick={() => setIsStart(prevStart => !prevStart)} style={{ marginBottom: 20 }}>{isStart ? 'Stop' : 'Start'}</button></div>
-    <button onClick={handleSubmit}>UPDATE STATUS</button>
+    <button className='button_update' onClick={handleSubmit}>UPDATE STATUS</button>
     {isStart && <React.Fragment>
       <div id="scanner-container" /> 
     </React.Fragment>}

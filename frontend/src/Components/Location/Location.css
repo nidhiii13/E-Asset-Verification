@@ -66,3 +66,16 @@ background-color: #F0F8FF;
 border:  solid #243e56;
 }
 
+.error{
+  position: absolute;
+  top: 4rem;
+  right:2.5rem;
+  color:red;
+}
+
+.button-stats{
+  background-color: rgba(157, 172, 214, 0.151);
+  color: var(--midnight-blue);
+  font-weight: bold;
+
+}
