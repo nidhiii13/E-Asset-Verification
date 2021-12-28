@@ -1,0 +1,121 @@
+body {
+    font-family: sans-serif;
+    font-size: 1em;
+    color: #333;
+    background-color: white;
+    }
+    .listvalue:hover{
+background: #4d6276;
+    }
+    .list_value1{
+        height: 50px;
+    }
+    .list_value{
+        height: 50px;
+    }
+
+    .list_value3{
+        height: 50px; 
+    }
+.nav_container {
+    position: absolute;
+    top: 34rem;
+    left:7em;
+    width: 250px;
+    background:var(--florida-waters);
+    transform: translateX(-50%) translateY(-50%);
+    height: 100%;
+    text-align: center;
+  }
+  
+  .nav_container input[type=checkbox] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+      display: block;
+    cursor: pointer;
+  }
+  
+  .nav_container ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav_container a {
+    display: block;
+    padding: 15px 20px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+  }
+  
+  .nav_container li {
+    position: relative;
+    float: right;
+    width: 100%;
+    list-style: none;
+    color: rgba(255, 255, 255, 0.7);
+    transition: 0.5s;
+  }
+  
+  .nav_container li:first-child {
+    border-top: none;
+  }
+  
+  .nav_container ul > li.sub > a:after {
+    pointer-events: none;
+    position: relative;
+    float: right !important;
+    content: '+';
+    margin-top: -0.1em;
+    font-size: 1.2em;
+    vertical-align: middle;
+    transition: 0.5s;
+  }
+ 
+  .submenu.sub:hover{
+      background-color:#4d6276 !important;
+  }
+  .nav_container .submenu {
+    max-height: 0;
+    overflow: hidden;
+    border-top: none;
+    transition: max-height 0.5s ease-in-out;
+  }
+  
+  
+  nav input[type=checkbox]:checked ~ .submenu {
+    max-height: 999px;
+    border-top: 1px solid #555;
+  }
+  nav input[type=checkbox]:checked ~ a:after {
+    transform: rotate(45deg);
+  }
+  
+  nav li:hover {
+    background: #4d6276 !important;
+  }
+  .nav_container .submenu a {
+    padding: 10px 20px;
+    background: #243E56;
+  }
+  
+  .nav_container .submenu li {
+    list-style-position: inside;
+    list-style-type: square;
+    background: #333;
+  }
+  
+  .nav_container .submenu li.sub {
+    list-style: none;
+  }
+  
+  .nav_container .submenu li li {
+    background: #243E56;
+  }
+  
+  .nav_container .submenu li li li {
+    background: #243E56;
+  }

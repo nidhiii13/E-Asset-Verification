@@ -5,14 +5,15 @@ import { useState } from 'react';
 import xlsx from 'xlsx';
 import axios from 'axios';
 import AssistantDashboard from './Dashboard/AssistantDashboard';
+import { useSelector } from 'react-redux';
 const Home = () => {
     useEffect(() => {
         const token=localStorage.getItem('token');
         console.log(token);
     }, [])
     const [selectedFile, setSelectedFile] = useState({});
-	const [isFilePicked, setIsFilePicked] = useState(false);
-
+    const [msg,setMsg]=useState("");
+    const info = useSelector((state) => state.User.info);
 	const changeHandler = (e) => {
 		e.preventDefault();
     if (e.target.files) {
@@ -34,26 +35,27 @@ const Home = () => {
 
 	const handleSubmission = () => {
         axios.post("http://127.0.0.1:8000/asset/barcode",selectedFile,{headers: {
-         'Content-Type' : 'application/json' 
+         'Content-Type' : 'application/json' ,
+         "Authorization" : `Token ${info.token}`
     }})
     .then((res) => {
         console.log("RESPONSE RECEIVED: ", (res.data));
         setSelectedFile("");
+        setMsg("Success!");
       })
       .catch((err) => {
         console.log("AXIOS ERROR: ", err);
         setSelectedFile("");
-
-      })
-	};
+        setMsg("Fail!");
+    })};
     return (
         <div>
             
             <AssistantDashboard />
-            
+            <div className='imgclass'><img src="Assitant.jpg" alt="" /></div>
             <div className='assistantblock1'>
-            
-            <h2 className='h2block_home1'>Upload the excel file</h2>          
+            <h2 className='h2block_home1'>Upload the excel file</h2>    
+            { <h4 className='error'>{msg}</h4>}         
             <div className='input_home1'><input type="file" name="file" onChange={changeHandler} /></div>
 			<div className='submit_home1'>
 				<button className='button_home1' onClick={handleSubmission}>Submit</button>

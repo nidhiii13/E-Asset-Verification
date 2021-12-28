@@ -13,7 +13,7 @@ body {
 .nav {
   height: 6vh;
   width: 100%;
-  background-color: var(--midnight-blue);
+  background-color: var(--florida-waters);
   position: absolute;
   display: flex;
   padding: auto;
@@ -36,22 +36,25 @@ body {
 }
 
 .nav > .nav-links {
+  position: absolute;
+  right:4rem;
   display: inline;
   float: right;
-  font-size: 1.2rem;;
+  font-size: 1.2rem;
 }
 
 .nav > .nav-links > a {
   display: inline-block;
+  position: relative;
   padding: 13px 10px 13px 10px;
   text-decoration: none;
-  font-size: 1.5rem;
-  color: var(--misty-rose);
+  font-size: 1.6rem;
+  color: var(--floral-white);
 }
 
 .nav > .nav-links > a:hover {
     height: 8vh;
-  background-color: rgba(0, 0, 0, 0.3);
+
 }
 
 .nav > #nav-check {

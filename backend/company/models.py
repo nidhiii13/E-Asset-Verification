@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import RegexValidator
 
 # Create your models here.
 class Company(models.Model):
@@ -6,7 +7,9 @@ class Company(models.Model):
     company_name=models.TextField(max_length=20)
     location=models.TextField()
     email_id=models.EmailField()
-    enquiry_no=models.CharField(max_length=10)
+    phone_regex = RegexValidator(regex=r'^[6-9]\d{9}$', message=" 10 digits allowed.")
+    enquiry_no=models.CharField(validators=[phone_regex],max_length=10)
+    list =models.IntegerField(default=None)
 
     class Meta:
         db_table='company'

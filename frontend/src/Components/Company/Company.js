@@ -18,14 +18,15 @@ const Company = () => {
         "company_name": cname,
         "location": cloc,
         "email_id": cmail,
-        "enquiry_no": cph
+        "enquiry_no": cph,
+        "list":0
         }
         setCid("");
         setCname("");
         setCmail("");
         setCloc("");
         setCph("");
-
+      
         axios.post("http://127.0.0.1:8000/company/add/",data,{headers: {
          'Content-Type' : 'application/json' 
     }})
@@ -44,11 +45,12 @@ const Company = () => {
         <>
    <AssistantDashboard />
             <div className='assistantblock'>
-
+       
                 <h2 className='h2block_home'>Add company details</h2>
-                <button><Link to= "/companystats"> Company stats report</Link></button>
+                {error && <h4 className='error'>Invalid Details! Enter again</h4>}
+                <button className='button-stats'><Link to= "/companystats"> Company stats report </Link></button>
                 <div className='input_home'>
-                    <div className='textblock'><p>Comapny ID</p></div>
+                    <div className='textblock'><p>Company ID</p></div>
                     <div className='inputblock'>
                         <input type="text" name="file" className='input' value={cid} onChange={(e) => setCid(e.target.value)}/* onChange={changeHandler} */ />
                     </div>
@@ -58,7 +60,7 @@ const Company = () => {
                     </div>
                     <div className='textblock'><p>Company Email</p></div>
                     <div className='inputblock'>
-                        <input type="email" name="file" className='input' value={cmail} onChange={(e) => setCmail(e.target.value)} /* onChange={changeHandler} */ />
+                        <input type="email" required="required" name="file" className='input' value={cmail} onChange={(e) => setCmail(e.target.value)} /* onChange={changeHandler} */ />
                     </div>
                     <div className='textblock'><p>Company Location</p></div>
                     <div className='inputblock'>
@@ -69,7 +71,6 @@ const Company = () => {
                         <input type="text" name="file" className='input' value={cph} onChange={(e) => setCph(e.target.value)}/* onChange={changeHandler} */ />
                     </div>
                     <div className='submit_home'>
-                        {error && <h2>Invalid Credentials! Enter again</h2>}
                         <button className='button_home' onClick={handleSubmit} >Submit</button>
                     </div>
                 </div>

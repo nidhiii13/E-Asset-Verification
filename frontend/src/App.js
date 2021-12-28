@@ -19,6 +19,9 @@ import { Redirect } from 'react-router-dom';
 import Companystats from './Components/CompanyStats/Companystats';
 import Locationstats from './Components/LocationStats/Locationstats';
 import Update from './Components/UpdateAsset/Update';
+import Servicestats from './Components/ServiceStats/Servicestats';
+import Verifystats from './Components/VerificationStats/Verifystats';
+import ContactUs from './Components/ContactUs/ContactUs';
 function App() {
      const info = useSelector((state) => state.User.info);
   return (
@@ -27,6 +30,9 @@ function App() {
      <Switch>
           <Route exact path="/">
             <Login />
+          </Route>
+          <Route exact path="/contact">
+            <ContactUs />
           </Route>
           {info.isLoggedIn && info.userType =='assistant'?
               (<><Route exact path="/assistant">
@@ -47,6 +53,9 @@ function App() {
           <Route exact path="/locationstats">
             <Locationstats />
           </Route>
+          <Route exact path="/servicestats">
+            <Servicestats />
+          </Route>
           <Route exact path="/addlocation">
             <Location />
           </Route></>) : info.isLoggedIn && info.userType == 'verifier'?
@@ -57,6 +66,12 @@ function App() {
           </Route>
           <Route exact path="/verifierhome">
             <Verifierhome />
+          </Route>
+          <Route exact path="/verifystats/found">
+            <Verifystats status={true} />
+          </Route>
+          <Route exact path="/verifystats/notfound">
+            <Verifystats status={false} />
           </Route></>):
               (
                 <Redirect to="/"/>

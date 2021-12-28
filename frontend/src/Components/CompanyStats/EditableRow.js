@@ -42,7 +42,7 @@ const EditableRow = ({
           type="email"
           required="required"
           placeholder=" email"
-          name="email"
+          name="email_id"
           value={editFormData.email_id}
           onChange={handleEditFormChange}
         ></input>
@@ -54,6 +54,16 @@ const EditableRow = ({
           placeholder=" enquiry no"
           name="enquiry_no"
           value={editFormData.enquiry_no}
+          onChange={handleEditFormChange}
+        ></input>
+      </td>
+      <td>
+        <input
+          type="number"
+          required="required"
+          placeholder="list"
+          name="list"
+          value={editFormData.list}
           onChange={handleEditFormChange}
         ></input>
       </td>

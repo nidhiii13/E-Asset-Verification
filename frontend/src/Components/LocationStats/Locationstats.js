@@ -6,6 +6,7 @@ import ReadOnlyRow from "./ReadOnlyRow";
 import axios from "axios";
 import { useEffect } from "react";
 import { stream } from "xlsx";
+import { useSelector } from "react-redux";
 const Locationstats = () => {
 
   const [flag,setFlag]= useState(false);
@@ -19,9 +20,11 @@ const Locationstats = () => {
   });
 
   const [editContactId, setEditContactId] = useState(null);
-
+  const info = useSelector((state) => state.User.info);
   useEffect(async() => {
-    const res=await axios.get('http://127.0.0.1:8000/location/getloc');
+    const res=await axios.get('http://127.0.0.1:8000/location/getloc',{headers: {
+        "Authorization" : `Token ${info.token}`
+    }});
     console.log(res.data);
     const data= res.data;
     data.map((obj)=>{
@@ -63,9 +66,13 @@ const Locationstats = () => {
     newContacts[index] = editedContact;
      console.log(newContacts[index].room_no);
      const pk =newContacts[index].room_no
-    setContacts(newContacts);
+ 
     setEditContactId(null);
-    const req=await axios.put('http://127.0.0.1:8000/location/editloc/'+pk,editedContact);
+    const req=await axios.put('http://127.0.0.1:8000/location/editloc/'+pk,editedContact,{headers: {
+        "Authorization" : `Token ${info.token}`
+    }});
+    if (req.status==200)
+    setContacts(newContacts);
     console.log(req);
   };
 
@@ -90,10 +97,12 @@ const Locationstats = () => {
   const handleDeleteClick = async(contactId) => {
     const newContacts = [...contacts];
 
-    const index = contacts.findIndex((contact) => contact.company_id === contactId);
+    const index = contacts.findIndex((contact) => contact.room_no === contactId);
 
     newContacts.splice(index, 1);
-     const req= await axios.delete('http://127.0.0.1:8000/location/deleteloc/'+contactId);
+     const req= await axios.delete('http://127.0.0.1:8000/location/deleteloc/'+contactId,{headers: {
+        "Authorization" : `Token ${info.token}`
+    }});
      console.log(req);
     setContacts(newContacts);
     console.log(typeof(contacts))

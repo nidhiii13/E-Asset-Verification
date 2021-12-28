@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
 body {
-  background: white
+  background-color:white;
 }
 
 .login {
@@ -14,6 +14,7 @@ span{
     color: var(--light-coral);
 }
 .form {
+  top:3.3rem;
   position: relative;
   z-index: 1;
   border-radius: 10px;
@@ -21,7 +22,7 @@ span{
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;
-  background-color:var(--midnight-blue);
+  background-color:var(--florida-waters);
 }
 
 .form input {
@@ -60,7 +61,25 @@ span{
 .form button {
    font-weight: bolder;
 }
+#radio1{
+  position:absolute;
+  right: 50%;
+}
+.form-check-label1{
+  position: relative;
+  right: 60px;
+}
 
+#radio2{
+  position: relative;
+ left: 10%;
+ top: -13px;
+}
+.form-check-label2{
+  position: relative;
+  left: 80px;
+  top: -43px;
+}
 .form span {
   font-size: 2rem;
   font-weight: bolder;
@@ -68,4 +87,8 @@ span{
 }
 .radio_button{
   color: aliceblue;
+  position: relative;
+  top: 10px;
 }
+
+

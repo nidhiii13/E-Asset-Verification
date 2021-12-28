@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import Quagga from 'quagga';
 import "./Barcode.css";
 import axios from 'axios';
-
+import {useSelector} from 'react-redux';
 const Barcode = (props) => {
 
   const firstUpdate = useRef(true);
   const [isStart, setIsStart] = useState(false);
   const [barcode, setBarcode] = useState('');
+
+  const info = useSelector((state) => state.User.info);
 
   useEffect(() => {
     return () => {
@@ -36,7 +38,8 @@ const Barcode = (props) => {
     }
     setBarcode("");
     axios.post("http://127.0.0.1:8000/asset/updatestatus",data,{headers: {
-         'Content-Type' : 'application/json' 
+         'Content-Type' : 'application/json' ,
+         "Authorization" : `Token ${info.token}`
     }})
     .then((res) => {
         console.log("RESPONSE RECEIVED: ", (res.data));
@@ -150,7 +153,7 @@ const Barcode = (props) => {
     <h3 className='h3_barcode_block'>Barcode Scanner</h3>
     <span className='code_block'>Barcode: {barcode}</span>
     <div className='button_barcode_block'><button onClick={() => setIsStart(prevStart => !prevStart)} style={{ marginBottom: 20 }}>{isStart ? 'Stop' : 'Start'}</button></div>
-    <button onClick={handleSubmit}>UPDATE STATUS</button>
+    <button className='button_update' onClick={handleSubmit}>UPDATE STATUS</button>
     {isStart && <React.Fragment>
       <div id="scanner-container" /> 
     </React.Fragment>}
