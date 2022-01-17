@@ -1,0 +1,53 @@
+.pred_body {
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+    position: absolute;
+    left: 25%;
+    top: 15%;
+}
+.pred_h1 {
+	
+	font-size: 2rem;
+	color: #243e56;
+    position: relative;
+    padding: 50px;
+	
+}
+
+.pred_form {
+	max-width: 40vw;
+	display: flex;
+	flex-direction: column;
+   
+}
+
+.pred_label{
+    width: 300px;
+    height: 50px;
+   margin: 6px 2px;
+    background-color: #243e56;
+    color: white;
+    font-size: large;
+    text-align:center;
+    padding-top: 15px;
+}
+
+.pred_input {
+	border: 2px solid lightslategray;
+	height: 60px;
+    width: 200px;
+	border-radius: 3px;
+	padding: 10px;
+	font-size: 1rem;
+  position: relative;
+  left: 20%;
+   
+}
+
+.pred_input:focus {
+	outline: none;
+	border: 2px solid darkslategray;
+}

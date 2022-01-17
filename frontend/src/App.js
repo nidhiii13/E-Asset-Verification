@@ -20,6 +20,9 @@ import Companystats from './Components/Companystats/Companystats';
 import Locationstats from './Components/Locationstats/Locationstats';
 import Servicestats from './Components/Servicestats/Servicestats';
 import Verifystats from './Components/Verifystats/Verifystats';
+import CompanyGraph from './Components/CompanyGraph/CompanyGraph';
+import LocationGraph from './Components/LocationGraph/LocationGraph'
+import Prediction from './Components/Prediction/Prediction';
 function App() {
  
 
@@ -65,6 +68,15 @@ function App() {
           </Route>
           <Route exact path="/Verifystats">
             <Verifystats />
+          </Route>
+          <Route exact path="/CompanyGraph">
+            < CompanyGraph/>
+          </Route>
+          <Route exact path="/LocationGraph">
+            < LocationGraph/>
+          </Route>
+          <Route exact path="/Prediction">
+            <Prediction />
           </Route>
           </Switch>
     </>

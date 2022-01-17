@@ -1,11 +1,18 @@
   import React, { useState, Fragment } from "react";
+  import {useRef} from 'react';
 import { nanoid } from "nanoid";
 import "./Companystats.css";
 import data from "./mock-data.json";
 import EditableRow from "./EditableRow";
 import ReadOnlyRow from "./ReadOnlyRow";
+import { useReactToPrint } from "react-to-print";
 
 const Companystats = () => {
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
   const [contacts, setContacts] = useState(data);
  
 
@@ -81,6 +88,7 @@ const Companystats = () => {
 
   return (
     <div className="app-container">
+      <div ref={componentRef} className="card">
         <h1 className="stats_head">Company Stats</h1>
       <form className="stats_form" onSubmit={handleEditFormSubmit}>
         <table className="stats_table">
@@ -115,8 +123,10 @@ const Companystats = () => {
           </tbody>
         </table>
       </form>
-
-      
+      </div>
+      <div>
+      <button onClick={handlePrint} className="print__button">  Print </button>
+      </div>
     </div>
   );
 };

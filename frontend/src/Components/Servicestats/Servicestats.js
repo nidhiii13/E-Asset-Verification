@@ -5,8 +5,21 @@ import data from "./mock-data.json";
 import EditableRow from "./EditableRow";
 import ReadOnlyRow from "./ReadOnlyRow";
 import { useEffect } from "react";
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 const Servicestats = () => {
+  const exportPdf = () => {
+
+    html2canvas(document.querySelector("#capture")).then(canvas => {
+       document.body.appendChild(canvas);  // if you want see your screenshot in body.
+       const imgData = canvas.toDataURL('image/png');
+       const pdf = new jsPDF();
+       pdf.addImage(imgData, 'PNG', 0, 0);
+       pdf.save("download.pdf"); 
+   });
+
+}
   const [contacts, setContacts] = useState(data);
 
   const [editFormData, setEditFormData] = useState({
@@ -92,6 +105,7 @@ const Servicestats = () => {
 
   return (
     <div className="app-container">
+      <div id="capture">
         <h1 className="stats_head">Company Stats</h1>
       <form className="stats_form" onSubmit={handleEditFormSubmit}>
         <table className="stats_table">
@@ -125,7 +139,8 @@ const Servicestats = () => {
           </tbody>
         </table>
       </form>
-
+      </div>
+      <button onClick={exportPdf} className="print__button">  Print </button>
       
     </div>
   );
