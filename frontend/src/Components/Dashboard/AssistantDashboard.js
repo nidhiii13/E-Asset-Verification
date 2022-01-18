@@ -1,7 +1,25 @@
 import React from 'react'
 import "./Dashboard.css";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../Redux/User';
+import { useSelector } from 'react-redux';
 const AssistantDashboard = () => {
+    const user = useSelector(state => state.User.info);
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const handleSubmit = () => {
+        const info = {
+            isloggedIn: false
+        }
+        console.log(user.type);
+        localStorage.clear();
+        dispatch(logoutUser(info));
+
+        console.log('logout');
+        history.push('/');
+    }
     return (
         <>
             <div className="s-layout">
@@ -14,40 +32,54 @@ const AssistantDashboard = () => {
                     <nav className="s-sidebar__nav">
                         <ul>
                             <li>
-                            <Link to="/home"className="s-sidebar__nav-link" > 
+                                <Link to="/home" className="s-sidebar__nav-link" >
                                     <i className="fa fa-camera"></i><em>Generate Barcode</em>
-                                    </Link>
+                                </Link>
                             </li>
                             <li>
-                            <Link to="/addcompany"className="s-sidebar__nav-link" > 
+                                <Link to="/asset/link" className="s-sidebar__nav-link" >
+                                    <i className="fa fa-camera"></i><em>Link Asset details</em>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/addcompany" className="s-sidebar__nav-link" >
                                     <i className="fa fa-camera"></i><em>Company stats</em>
-                                    </Link>
+                                </Link>
                             </li>
                             <li>
-                            <Link to="/addlocation"className="s-sidebar__nav-link" > 
+                                <Link to="/addlocation" className="s-sidebar__nav-link" >
                                     <i className="fa fa-camera"></i><em>Location details</em>
-                                    </Link>
+                                </Link>
                             </li>
                             <li>
-                            <Link to="/update"className="s-sidebar__nav-link" > 
-                                    <i className="fa fa-camera"></i><em>Update</em>
-                                    </Link>
-                            </li>
-                            <li>
-                                <a className="s-sidebar__nav-link" href="#0">
+                                <Link to="/servicestats" className="s-sidebar__nav-link" >
                                     <i className="fa fa-camera"></i><em>Service Stats</em>
-                                </a>
+                                </Link>
+                            </li>
+                            <li className="sub">
+                                <input type="checkbox" />
+                                <a href="#" className='list_value'>Graph Analytics</a>
+                                <ul className="submenu">
+                                    <li className="sub">
+                                        {/*  <input type="checkbox" /> */}
+                                        <> <Link to='/CompanyGraph' className='list_value'>Company Contributions</Link></>
+                                    </li>
+                                    <li className="sub">
+                                        {/*  <input type="checkbox" /> */}
+                                        <><Link to='/LocationGraph' className='list_value' >Assets Vs Location</Link></>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
-                            <Link to="/help"className="s-sidebar__nav-link" > 
-                                    <i className="fa fa-camera"></i><em>Help</em>
-                                    </Link>
+                                <a className="bcls" href="#0">
+                                    <i className="fa fa-camera"></i><em> <button className='logout' onClick={handleSubmit} >Logout </button></em>
+                                </a>
                             </li>
                         </ul>
                     </nav>
                 </div>
 
-            
+
             </div>
         </>
     )
