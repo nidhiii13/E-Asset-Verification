@@ -1,9 +1,10 @@
-import React from 'react'
-import { Bar, Pie ,Line} from 'react-chartjs-2'
-import { Chart as ChartJS } from 'chart.js/auto'
-import { Chart }            from 'react-chartjs-2'
-import { data } from 'jquery'
-import "./CompanyGraph.css"
+import React from 'react';
+import { Bar, Pie ,Line} from 'react-chartjs-2';
+import { Chart as ChartJS } from 'chart.js/auto';
+import { Chart }            from 'react-chartjs-2';
+import { data } from 'jquery';
+import "./CompanyGraph.css";
+import AssistantDashboard from '../Dashboard/AssistantDashboard';
 const CompanyGraph = () => {
   
   function getRandomColor() {
@@ -22,6 +23,7 @@ const CompanyGraph = () => {
 
     return (
         <div className="chart_body">
+            <AssistantDashboard/>
       <h1 className='chart_h1'>Company Contibution Statistics</h1>
       <div  className='chart'>
         <Bar

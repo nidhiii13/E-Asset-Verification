@@ -1,9 +1,13 @@
-.chart_body
-{
-    position: relative;
-    left: 200px;
+.chart_h1{
+    position: absolute;
+    top: 20%;
+    left: 35%;
 }
 .chart
-{   
-    max-width: 650px;  
+{   min-width: 400px;
+    width: 650px;
+    max-width: 650px;
+    position: absolute;
+    top: 35%;
+    left: 20%;
 }
