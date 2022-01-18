@@ -3,6 +3,8 @@ import { Bar, Pie ,Line} from 'react-chartjs-2'
 import { Chart as ChartJS } from 'chart.js/auto'
 import { Chart }            from 'react-chartjs-2'
 import { data } from 'jquery'
+import './LocationGraph.css'
+import AssistantDashboard from '../Dashboard/AssistantDashboard'
 
 const LocationGraph = () => {
   
@@ -22,9 +24,10 @@ const LocationGraph = () => {
 
     return (
         <div className="chart_body">
+            <AssistantDashboard/>
       <h1 className='chart_h1'>Statistics of Assets present in a Location</h1>
       <div  className='chart'>
-        <Bar
+        <Pie
           data={{
             // Name of the variables on x-axies for each bar
             labels: ["DELL","HP","ACER","SONY","SAMSUNG","MI","VKit","Canakit","PHILIPS","ASUS"],
