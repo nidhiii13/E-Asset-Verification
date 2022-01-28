@@ -54,6 +54,37 @@
 	outline: none;
 	border: 2px solid darkslategray;
 }
+
+#pred_input1{
+    border: 2px solid lightslategray;
+	height: 60px;
+    width: 200px;
+	border-radius: 3px;
+	padding: 10px;
+	font-size: 1rem;
+  position: relative;
+  right:-250px;
+  top: -60px;
+}
+#pred_input1:focus {
+	outline: none;
+	border: 2px solid darkslategray;
+}
+.pred_input2{
+    border: 2px solid lightslategray;
+	height: 60px;
+    width: 200px;
+	border-radius: 3px;
+	padding: 10px;
+	font-size: 1rem;
+  position: relative;
+  right:-250px;
+  top: -60px;
+}
+.pred_input2:focus {
+	outline: none;
+	border: 2px solid darkslategray;
+}
 .button_home{
     width: 100px;
     height: 50px;

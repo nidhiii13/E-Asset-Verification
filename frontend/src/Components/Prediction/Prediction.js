@@ -1,55 +1,87 @@
 import React from 'react'
 import "./Prediction.css"
 import AssistantDashboard from '../Dashboard/AssistantDashboard'
+import { useState, useEffect } from "react";
+
+const countries = {
+    MONITOR:["HP", "ACER", "SONY", "SAMSUNG", "MI", "VKit"],
+    PROJECTOR:["ACER", "SONY", "SAMSUNG", "MI", "VKit", "Canakit", "PHILIPS", "ASUS" ],
+    HEADPHONE:["SAMSUNG", "MI", "VKit"], 
+    RASPBERRY_Pi_Kit:[ "PHILIPS", "ASUS"], 
+    SPEAKER:["HP", "ACER", "SONY", "SAMSUNG"], 
+    LAPTOP:["HP", "ASUS", "ACER", "MI"], 
+    DESKTOP:["SAMSUNG", "HP", "ASUS"],
+};
 
 const Prediction = () => {
+    const [countryData, setCountryData] = useState(["MONITOR"]);
+    const [selectedCountry, setSelectedCountry] = useState("");
+
+    const checkInsertInArray = newCountry => {
+        let findStatus = countryData.find(x => {
+            return x === newCountry;
+        });
+        if (!findStatus) {
+            setCountryData([...countryData, newCountry]);
+        }
+    };
+
+    const countryChange = event => {
+        if (event.target.value) {
+            setSelectedCountry(event.target.value);
+        }
+    };
+
+    useEffect(() => {
+        Object.keys(countries).forEach(country => {
+            checkInsertInArray(country);
+        });
+    });
+
     return (
         <div className='pred_conatiner'>
             <AssistantDashboard />
             <div className='pred_body'>
                 <h1 className='pred_h1'>Service Prediction of an Asset</h1>
                 <form className='pred_form'>
-                    <label className='pred_label' for="myHouse">Select a Product:</label>
-                    <input list="magicHouses" id="myHouse" name="myHouse" placeholder="select answer" className='pred_input' />
-                    <datalist id="magicHouses">
-                        <option value="MONITOR" />
-                        <option value="PROJECTOR" />
-                        <option value="HEADPHONE" />
-                        <option value="RASPBERRY Pi Kit" />
-                        <option value="SPEAKER" />
-                        <option value="LAPTOP" />
-                        <option value="DESKTOP" />
+                    <label className='pred_label'>Select a Product:</label>
+                    <select id='pred_input1' onChange={countryChange}>
+                        <option value="">select</option>
+                        {countryData.map(allCountries => {
+                            return <option value={allCountries}>{allCountries}</option>;
+                        })}
+                    </select>
+                    <label className='pred_label'>Select a Company:</label>
+                    {selectedCountry ? (<>
+                        <select className='pred_input2'>
+                            <option value="">select</option>
+                            {countries[selectedCountry].map(allCountries => {
+                                return <option value={allCountries}>{allCountries}</option>;
+                            })}
+                        </select>
+                    </>
+                    ) : (
+                        <>
+                        <select className='pred_input2'>
+                        <option value="">select</option>
+                    </select>
+                    </>
+                    )}
 
-                    </datalist>
-                    <label className='pred_label' for="mycom">Select a Company:</label>
-                    <input list="magiccom" id="mycom" name="mycom" placeholder="select answer" className='pred_input' />
-                    <datalist id="magiccom">
-                        <option value="DELL" />
-                        <option value="HP" />
-                        <option value="ACER" />
-                        <option value="SONY" />
-                        <option value="SAMSUNG" />
-                        <option value="MI" />
-                        <option value="VKit" />
-                        <option value="Canakit" />
-                        <option value="PHILIPS" />
-                        <option value="ASUS" />
-                    </datalist>
-                    <label className='pred_label' for="years">Select number of years:</label>
-                    <input list="magicyear" id="years" name="years" placeholder="select answer" className='pred_input' />
-                    <datalist id="magicyear">
-                        <option value="2" />
-                        <option value="3" />
-                        <option value="4" />
-                        <option value="5" />
-                        <option value="6" />
-                        <option value="7" />
-                        <option value="8" />
-                        <option value="9" />
-                        <option value="10" />
-                        <option value="more than 10" />
-
-                    </datalist>
+                    <label className='pred_label' >Select number of years:</label>
+                    <select className='pred_input'>
+                        <option value="1">select</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">more than 10</option>
+                    </select>
                 </form>
                 <div className='pred_submit'>
                     <button className='button_home' onClick={""} >Submit</button>
@@ -57,7 +89,7 @@ const Prediction = () => {
                 </div>
             </div>
         </div>
-    )
+  );
 }
 
 export default Prediction
