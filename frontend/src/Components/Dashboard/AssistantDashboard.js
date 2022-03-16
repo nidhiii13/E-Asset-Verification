@@ -57,6 +57,11 @@ const AssistantDashboard = () => {
                                     </Link>
                             </li>
                             <li>
+                            <Link to="/serviceprediction"className="s-sidebar__nav-link" > 
+                                    <i className="fa fa-camera"></i><em>Service Prediction</em>
+                                    </Link>
+                            </li>
+                            <li>
                                 <a className="s-sidebar__nav-link" href="#0">
                                 <i className="fa fa-camera"></i><em> <button className='logout' onClick={handleSubmit} >Logout </button></em>
                                 </a>

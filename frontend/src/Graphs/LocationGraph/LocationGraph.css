@@ -1,0 +1,13 @@
+.chart_h1{
+    position: absolute;
+    top: 20%;
+    left: 35%;
+  }
+  .chart
+  {   
+    max-width: 650px;
+    position: absolute;
+    top: 35%;
+    left: 25%;
+  }
+  

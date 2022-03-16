@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+body{
+  font-family: 'Comfortaa', cursive;
+}
+
 .help_container{
     position: absolute;
     top: 150px;
@@ -7,7 +12,6 @@
 .help_heading{
     position: relative;
     left: 240px;
-    font-family: 'Poppins', sans-serif, 'arial';
     font-weight: 600;
     font-size: 30px;
     color: var(--midnight-blue);

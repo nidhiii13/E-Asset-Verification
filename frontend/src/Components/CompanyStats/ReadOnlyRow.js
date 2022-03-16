@@ -1,6 +1,6 @@
 import React from "react";
-
-const ReadOnlyRow = ({ contact, handleEditClick, handleDeleteClick }) => {
+import "./Companystats.css";
+const ReadOnlyRow = ({active, contact, handleEditClick, handleDeleteClick }) => {
   return (
     <tr>
       <td>{contact.company_id}</td>
@@ -9,14 +9,14 @@ const ReadOnlyRow = ({ contact, handleEditClick, handleDeleteClick }) => {
       <td>{contact.email_id}</td>
       <td>{contact.enquiry_no}</td>
       <td>{contact.list}</td>
-      <td>
+      <td style={{display:active?"none":"flex"}}>
         <button
-          type="button"
+          type="button" className="edit_button"
           onClick={(event) => handleEditClick(event, contact)}
         >
           Edit
         </button>
-        <button type="button" onClick={() => handleDeleteClick(contact.company_id)}>
+        <button type="button" className="edit_button" onClick={() => handleDeleteClick(contact.company_id)}>
           Delete
         </button>
       </td>

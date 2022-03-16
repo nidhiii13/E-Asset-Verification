@@ -54,7 +54,7 @@ const Update = () => {
             <div className='inputblock'> 
             <input type="text" name="file" placeholder='Room no' className='input' value={aloc} onChange={(e)=>setAloc(e.target.value)}/* onChange={changeHandler} */ />
             </div>
-            <div className='textblock'><p>Comapny ID</p></div>   
+            <div className='textblock'><p>Company ID</p></div>   
             <div className='inputblock'> 
             <input type="text" name="file" placeholder='C-ID' className='input' value={c_id} onChange={(e)=>setCid(e.target.value)}/* onChange={changeHandler} */ />
         </div>

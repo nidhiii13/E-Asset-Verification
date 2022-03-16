@@ -6,8 +6,9 @@ import ReadOnlyRow from "./ReadOnlyRow";
 import { useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
+import exportFromJSON from "export-from-json";
 const Servicestats = () => {
+  const [active,isActive] = useState(false);
   const [contacts, setContacts] = useState({});
   const [flag,setFlag] = useState(false);
   const [editFormData, setEditFormData] = useState({
@@ -104,9 +105,29 @@ const Servicestats = () => {
     //console.log(typeof(contacts))
   };
 
+  const handlePrint =()=>{
+   
+    isActive(true);
+    setTimeout(printReport,300);
+  
+  }
+const printReport=()=>{
+  window.print();
+  isActive(false);
+}
+const handleCSV = async() =>{
+  const res=await axios.get('http://127.0.0.1:8000/service/getservice',{headers: {
+        "Authorization" : `Token ${info.token}`
+    }});
+   var data =res.data;
+  const fileName = 'download'
+  const exportType = 'csv'
+
+  exportFromJSON({ data, fileName, exportType })
+}
   return (
     <div className="app-container">
-        <h1 className="stats_head">Service Stats</h1>
+        <h1 className="stats_head">Service Stats <button className={active ? "remove-action" : "print_button"} onClick={handlePrint}>Print</button><button className={active ? "remove-action" : "print_button"} onClick={handleCSV}>CSV</button></h1>
       <form className="stats_form" onSubmit={handleEditFormSubmit}>
         <table className="stats_table">
           <thead>
@@ -115,7 +136,7 @@ const Servicestats = () => {
               <th>Remarks</th>
               <th>Service Count</th>
               <th>Asset ID</th>
-              <th>Actions</th>
+              <th className={active ? "remove-action" : "action"}>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -129,6 +150,7 @@ const Servicestats = () => {
                   />
                 ) : (
                   <ReadOnlyRow
+                    active={active}
                     contact={contact}
                     handleEditClick={handleEditClick}
                     handleDeleteClick={handleDeleteClick}

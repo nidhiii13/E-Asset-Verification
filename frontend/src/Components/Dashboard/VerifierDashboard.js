@@ -40,6 +40,20 @@ const VerifierDashboard = () => {
                             </li>
                         </ul>
                     </li>
+                    <li className="sub">
+                                <input type="checkbox" />
+                                <a href="#" className='list_value'>Graph Analytics</a>
+                                <ul className="submenu">
+                                    <li className="sub">
+                                        {/*  <input type="checkbox" /> */}
+                                        <> <Link to='/CompanyGraph' className='list_value'>Company Contributions</Link></>
+                                    </li>
+                                    <li className="sub">
+                                        {/*  <input type="checkbox" /> */}
+                                        <><Link to='/LocationGraph' className='list_value' >Assets Vs Location</Link></>
+                                    </li>
+                                </ul>
+                            </li>
                     <li><button className='logout' onClick={handleSubmit} >Logout </button> </li>
                 </ul>
             </nav>

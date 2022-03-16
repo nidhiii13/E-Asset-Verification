@@ -1,0 +1,107 @@
+.pred_body {
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+    position: absolute;
+    left: 25%;
+    top: 15%;
+}
+.pred_h1 {
+	
+	font-size: 2rem;
+	color: #243e56;
+    position: relative;
+    padding: 30px;
+	
+}
+
+.pred_form {
+	max-width: 40vw;
+	display: flex;
+	flex-direction: column;
+   
+}
+
+.pred_label{
+    width: 300px;
+    height: 50px;
+   margin: 6px 2px;
+    background-color: #243e56;
+    color: white;
+    font-size: large;
+    text-align:center;
+    padding-top: 15px;
+    position: relative;
+    right: 80px;
+}
+
+.pred_input {
+	border: 2px solid lightslategray;
+	height: 60px;
+    width: 200px;
+	border-radius: 3px;
+	padding: 10px;
+	font-size: 1rem;
+  position: relative;
+  right:-250px;
+  top: -60px;
+   
+}
+
+.pred_input:focus {
+	outline: none;
+	border: 2px solid darkslategray;
+}
+
+#pred_input1{
+    border: 2px solid lightslategray;
+	height: 60px;
+    width: 200px;
+	border-radius: 3px;
+	padding: 10px;
+	font-size: 1rem;
+  position: relative;
+  right:-250px;
+  top: -60px;
+}
+#pred_input1:focus {
+	outline: none;
+	border: 2px solid darkslategray;
+}
+.pred_input2{
+    border: 2px solid lightslategray;
+	height: 60px;
+    width: 200px;
+	border-radius: 3px;
+	padding: 10px;
+	font-size: 1rem;
+  position: relative;
+  right:-250px;
+  top: -60px;
+}
+.pred_input2:focus {
+	outline: none;
+	border: 2px solid darkslategray;
+}
+.button_home{
+    width: 100px;
+    height: 50px;
+   margin: 6px 2px;
+    background-color: #243e56;
+    color: white;
+    font-size: large;
+  }
+  .pred_submit{
+      position: relative;
+      left: 20px;
+  }
+
+  .predict{
+    position: relative;
+    top: -1.7rem;
+ color: crimson;
+ font-weight: bold;
+ font-size: 1.4rem;
+}

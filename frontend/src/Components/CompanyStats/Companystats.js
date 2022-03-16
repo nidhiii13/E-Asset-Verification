@@ -7,11 +7,12 @@ import axios from "axios";
 import { useEffect } from "react";
 import { stream } from "xlsx";
 import { useSelector } from "react-redux";
+import exportFromJSON from 'export-from-json';
 const Companystats = () => {
 
   const [flag,setFlag]= useState(false);
   const [contacts, setContacts] = useState({});
-
+  const [active,isActive] = useState(false);
   const [editFormData, setEditFormData] = useState({
     company_id: "",
     company_name: "",
@@ -106,9 +107,28 @@ const Companystats = () => {
     console.log(typeof(contacts))
   };
 
+  const handlePrint =()=>{
+   
+    isActive(true);
+    setTimeout(printReport,300);
+  
+  }
+const printReport=()=>{
+  window.print();
+  isActive(false);
+}
+
+const handleCSV = async() =>{
+  const res=await axios.get('http://127.0.0.1:8000/company/add');
+   var data =res.data;
+  const fileName = 'download'
+  const exportType = 'csv'
+
+  exportFromJSON({ data, fileName, exportType })
+}
   return (
     <div className="app-container">
-        <h1 className="stats_head">Company Stats</h1>
+        <h1 className="stats_head">Company Stats  <button className={active ? "remove-action" : "print_button"} onClick={handlePrint}>Print</button><button className={active ? "remove-action" : "print_button"} onClick={handleCSV}>CSV</button></h1>
       <form className="stats_form" onSubmit={handleEditFormSubmit}>
         <table className="stats_table">
           <thead>
@@ -119,7 +139,7 @@ const Companystats = () => {
               <th>Email</th>
               <th>Enquiry No</th>
               <th>Contributions</th>
-              <th>Actions</th>
+              <th className={active ? "remove-action" : "action"}>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -133,6 +153,7 @@ const Companystats = () => {
                   />
                 ) : (
                   <ReadOnlyRow
+                    active={active}
                     contact={contact}
                     handleEditClick={handleEditClick}
                     handleDeleteClick={handleDeleteClick}

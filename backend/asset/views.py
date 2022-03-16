@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
 
+from service.models import Service
 from company.models import Company
 from location.models import Location
 from .serializers import AssetSerializer, SAP_AssetSerializer
@@ -26,11 +27,7 @@ def barcode_generate(request):
     json=request.data
     
     for i in json:
-        N = 13
-        res = ''.join(random.choices(string.digits, k = N))
-        number=str(res)
-        code=EAN13(number)
-        print(code)
+    
         date=i['capitalized_date']
         l=date.split('/')
         l.reverse()
@@ -48,15 +45,21 @@ def barcode_generate(request):
         serializer=SAP_AssetSerializer(data=i)
         if serializer.is_valid():
             serializer.save()
+            name=i['asset_id']
+            while True:
+                code = generate_random()
+                if Barcode.objects.filter(barcode_id=str(code)).exists():
+                    continue
+                else:
+                    break
+            barcode=Barcode.objects.create(asset_id=name,barcode_id=str(code))
+            code.save(r'C:\\Users\\nidhi\\Downloads\\barcode'+name)
             #return Response({'msg1':'success'})
         else:
-            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-        name=i['asset_id']
-        barcode=Barcode.objects.create(asset_id=name,barcode_id=str(code))
-        code.save(r'C:\\Users\\nidhi\\Downloads\\barcode'+name)
-        return Response({'msg2':'success'})
+            return Response({'msg':'fail'}, status=status.HTTP_400_BAD_REQUEST)
+        
 
-    return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response({'msg2':'success'})
         
 
 @csrf_exempt
@@ -129,6 +132,13 @@ def verification_process_notfound(request):
     for data in list:
         room = Location.objects.get(id=data['room_no'])
         data['room_no'] = room.room_no
+        asset =Asset.objects.get(asset_id=data['asset_id'])
+        if Service.objects.filter(asset_id=asset.id).exists():
+            service = Service.objects.get(asset_id=asset.id)
+            service.service_count+=1 
+            service.save()
+        else:
+            service = Service.objects.create(asset_id=asset,remarks = 'in service',status=True,service_count=1)
         company = Company.objects.get(id=data['company_id'])
         data['company_id'] = company.company_id
 
@@ -155,3 +165,11 @@ def edit_report(request,pk):
     else:
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
     return Response(serializer.data)
+
+def generate_random():
+    N = 13
+    res = ''.join(random.choices(string.digits, k = N))
+    number=str(res)
+    code=EAN13(number)
+    print(code)
+    return code

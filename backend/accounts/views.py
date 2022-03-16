@@ -59,5 +59,5 @@ def contact_us(request):
     email_id = request.data.get('email_id')
     phone = request.data.get('contact_no')
     message = request.data.get('query') +'\n\nPhone no : '+phone+ '\nEmail id : '+email_id
-    send_mail('Query from '+name, 'Query : '+message, 'testnode13@gmail.com', ['nidhihh.is19@rvce.edu.in'], fail_silently=False)
+    send_mail('Query from '+name, 'Query : '+message, 'nidhinidhu1234@gmail.com', ['nidhihh.is19@rvce.edu.in'], fail_silently=False)
     return Response({'msg':'success'})

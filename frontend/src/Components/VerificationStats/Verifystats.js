@@ -6,11 +6,13 @@ import ReadOnlyRow from "./ReadOnlyRow";
 import { useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
+import exportFromJSON from "export-from-json";
 const Verifystats = (props) => {
+  
   const [contacts, setContacts] = useState({});
   const [flag,setFlag] = useState(false);
   const [found,setFound]=useState("");
+  const [active,isActive] = useState(false);
   const [editFormData, setEditFormData] = useState({
     asset_id: "" ,
     asset_description: "",
@@ -101,10 +103,36 @@ const Verifystats = (props) => {
     setEditContactId(null);
   };
 
+  const handlePrint =()=>{
+   
+    isActive(true);
+    setTimeout(printReport,300);
+  
+  }
+const printReport=()=>{
+  window.print();
+  isActive(false);
+}
+const handleCSV = async() =>{
+  if(props.status==true)
+  {var res=await axios.get('http://127.0.0.1:8000/asset/verification/found',{headers: {
+      "Authorization" : `Token ${info.token}`
+  }});
+ setFound("found");}
+  else
+ { var res=await axios.get('http://127.0.0.1:8000/asset/verification/notfound',{headers: {
+      "Authorization" : `Token ${info.token}`
+  }});
+  setFound("Not found");}
+   var data =res.data;
+  const fileName = 'download'
+  const exportType = 'csv'
 
+  exportFromJSON({ data, fileName, exportType })
+}
   return (
     <div className="app-container">
-        <h1 className="stats_head">Verification Report for {found} assets</h1>
+        <h1 className="stats_headv">Verification Report for {found} assets <button className={active ? "remove-action" : "print_button"} onClick={handlePrint}>Print</button><button className={active ? "remove-action" : "print_button"} onClick={handleCSV}>CSV</button></h1>
       <form className="stats_form" onSubmit={handleEditFormSubmit}>
         <table className="stats_table">
           <thead>
@@ -115,7 +143,7 @@ const Verifystats = (props) => {
               <th>Company ID</th>
               <th>Location</th>
               <th>Status</th>
-              <th>Actions</th>
+              <th className={active ? "remove-action" : "action"}>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -129,6 +157,7 @@ const Verifystats = (props) => {
                   />
                 ) : (
                   <ReadOnlyRow
+                    active={active}
                     contact={contact}
                     handleEditClick={handleEditClick}
                   />

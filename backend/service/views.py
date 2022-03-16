@@ -1,3 +1,4 @@
+import imp
 import re
 from django.shortcuts import render
 from django.shortcuts import render
@@ -15,6 +16,9 @@ from rest_framework.status import (
     HTTP_200_OK
 )
 from rest_framework import serializers
+import pandas as pd
+import pickle
+model=pickle.load(open('ML-Model/ServicePrediction.pkl','rb+'))
 # Create your views here.
 @csrf_exempt
 @api_view(["POST"])
@@ -74,3 +78,19 @@ def delete_service(request,pk):
         query.delete()
         return Response({"status":"ok"}, status=HTTP_200_OK)
     return Response(serializers.errors, status=HTTP_400_BAD_REQUEST)
+
+@csrf_exempt
+@api_view(["POST"])
+def predict_service(request):
+    product = request.data.get('product')
+    company = request.data.get('company')
+    years = request.data.get('years')
+    
+    dataset = pd.read_csv('ML-Model/Dataset-e.csv')
+    dataset=dataset.drop(['Capitalized date'],axis=1)
+    X= dataset.drop(['Service count'],axis=1)
+
+    df = pd.DataFrame([[product,company,years]],columns=X.columns)
+    prediction = model.predict(df)
+    return Response({'prediction':prediction})
+    

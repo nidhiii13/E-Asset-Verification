@@ -22,6 +22,9 @@ import Update from './Components/UpdateAsset/Update';
 import Servicestats from './Components/ServiceStats/Servicestats';
 import Verifystats from './Components/VerificationStats/Verifystats';
 import ContactUs from './Components/ContactUs/ContactUs';
+import Prediction from './Components/Prediction/Prediction';
+import CompanyGraph from './Graphs/CompanyGraph/CompanyGraph';
+import LocationGraph from './Graphs/LocationGraph/LocationGraph';
 function App() {
      const info = useSelector((state) => state.User.info);
   return (
@@ -33,6 +36,12 @@ function App() {
           </Route>
           <Route exact path="/contact">
             <ContactUs />
+          </Route>
+          <Route exact path="/CompanyGraph">
+            < CompanyGraph/>
+          </Route>
+          <Route exact path="/LocationGraph">
+            < LocationGraph/>
           </Route>
           {info.isLoggedIn && info.userType =='assistant'?
               (<><Route exact path="/assistant">
@@ -55,6 +64,9 @@ function App() {
           </Route>
           <Route exact path="/servicestats">
             <Servicestats />
+          </Route>
+          <Route exact path="/serviceprediction">
+            <Prediction />
           </Route>
           <Route exact path="/addlocation">
             <Location />
